@@ -1,5 +1,9 @@
 *.js
+*.js.map
 *.map
+
+# node nodules
+/node_modules
 
 # JetBrains files
 .idea
