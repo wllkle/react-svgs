@@ -1,0 +1,39 @@
+{
+  "name": "react-icon-builder",
+  "version": "1.0.0",
+  "description": "Transform a directory of SVG icons into easily usable React components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wllkle/react-icon-builder.git"
+  },
+  "author": {
+    "name": "Rob Wilkie",
+    "email": "hello@wilkie.io",
+    "url": "wilkie.io"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wllkle/react-icon-builder/issues"
+  },
+  "homepage": "https://github.com/wllkle/react-icon-builder#readme",
+  "dependencies": {
+    "svgson": "^5.2.1",
+    "yargs": "^17.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.0",
+    "@types/typescript": "^2.0.0",
+    "@types/yargs": "^17.0.7",
+    "typescript": "^4.5.4"
+  },
+  "keywords": [
+    "react",
+    "svg",
+    "icons"
+  ]
+}

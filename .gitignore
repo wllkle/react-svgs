@@ -1,0 +1,6 @@
+*.js
+*.map
+
+# JetBrains files
+.idea
+
