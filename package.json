@@ -1,15 +1,15 @@
 {
-  "name": "react-icon-builder",
+  "name": "react-scripts-svg",
   "version": "1.0.0",
   "description": "Transform a directory of SVG icons into easily usable React components.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "tsc && node index.js",
     "build": "tsc"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wllkle/react-icon-builder.git"
+    "url": "git+https://github.com/wllkle/react-scripts-svg.git"
   },
   "author": {
     "name": "Rob Wilkie",
@@ -18,14 +18,16 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wllkle/react-icon-builder/issues"
+    "url": "https://github.com/wllkle/react-scripts-svg/issues"
   },
-  "homepage": "https://wilkie.io/projects/react-icon-builder",
+  "homepage": "https://wilkie.io/projects/react-scripts-svg",
   "dependencies": {
+    "cli-color": "^2.0.1",
     "svgson": "^5.2.1",
     "yargs": "^17.3.0"
   },
   "devDependencies": {
+    "@types/cli-color": "^2.0.1",
     "@types/node": "^17.0.0",
     "@types/typescript": "^2.0.0",
     "@types/yargs": "^17.0.7",
