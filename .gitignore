@@ -8,6 +8,8 @@
 # JetBrains files
 .idea
 
-# npm / yarn files
-yarn.lock
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
 yarn-error.log
