@@ -2,9 +2,12 @@
 *.js.map
 *.map
 
-# node nodules
+# node modules
 /node_modules
 
 # JetBrains files
 .idea
 
+# npm / yarn files
+yarn.lock
+yarn-error.log
