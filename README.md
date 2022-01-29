@@ -8,7 +8,7 @@ Transform a directory of SVG files into easily usable React components.
 npm install react-scripts-svg --save-dev
 ```
 
-## Usage
+## CLI Usage
 
 `react-scripts-svg -p assets/svg -o src/components`
 
@@ -46,3 +46,17 @@ The script below can be run using `npm run svg`
 | --className, -c     | Default className for generated component   | string  | icon    | false    |
 | --jsx, -j           | Use JSX file extensions (.jsx, .tsx)        | boolean | true    | false    |
 | --propTypes, --pt   | Generate PropTypes definition for component | boolean | true    | false    |
+
+## Component Usage
+
+This example assumes all default values are used.
+
+##### src/components/settings-icon/index.tsx
+```typescript jsx
+import React from "react"
+import Icon from "../icon"
+
+export const SettingsIcon = () => (
+    <Icon name="settings" className="settings-icon" style={{fill: "red"}} />
+);
+```
