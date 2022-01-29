@@ -3,10 +3,11 @@ interface IIconName {
     hyphen: string
 }
 
+export const capitaliseFirst = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
 export const buildNameObj = (str: string): IIconName => {
-    const capitaliseFirst = (str: string) => {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-    };
 
     str = str.replace(".svg", "").toLowerCase();
     const words = str.split(/\W/g);

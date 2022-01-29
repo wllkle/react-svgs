@@ -5,7 +5,8 @@ import {join} from "path"
 
 import {logger} from "./src/logger";
 import {IIconList} from "./src/interfaces";
-import {validatePath} from "./src/validation";
+import {validatePath, validateName} from "./src/validation";
+import {capitaliseFirst} from "./src/strings";
 import {getTemplate} from "./src/templates";
 import {createList} from "./src/parse";
 import {saveFile} from "./src/save";
@@ -14,12 +15,14 @@ interface Arguments {
     path: string,
     out?: string,
     typescript?: boolean,
-    componentName?: string,
+    name?: string,
     directory?: boolean,
+    fileName?: string,
     defaultExport?: boolean,
-    defaultClassName?: string,
-    // recursive?: boolean,
-    jsx?: boolean
+    className?: string,
+    jsx?: boolean,
+    propTypes?: boolean,
+    // recursive?: boolean
 }
 
 // @ts-ignore
@@ -43,71 +46,89 @@ const argv: Arguments = yargs(process.argv.slice(2))
             description: "Output TypeScript files",
             default: true
         },
-        componentName: {
+        name: {
             type: "string",
-            alias: "c",
-            description: "Filename of generated icon component",
-            default: "icon"
+            alias: "n",
+            description: "React component name",
+            default: "Icon"
         },
         directory: {
             type: "boolean",
             alias: "d",
-            description: "Create directory for component",
+            description: "Generate directory containing component",
             default: false,
+        },
+        fileName: {
+            type: "string",
+            alias: "f",
+            description: "File/directory name for generated icon component",
+            default: "icon"
         },
         defaultExport: {
             type: "boolean",
-            alias: "de",
+            alias: "x",
             description: "Use default exports",
-            default: false
+            default: true
         },
-        defaultClassName: {
+        className: {
             type: "string",
-            alias: "cn",
-            description: "Default class name for generated icons",
+            alias: "c",
+            description: "Default className for generated icons",
             default: "icon"
+        },
+        jsx: {
+            type: "boolean",
+            alias: "j",
+            description: "Use JSX file extensions (.jsx, .tsx)",
+            default: true
+        },
+        propTypes: {
+            type: "boolean",
+            alias: "pt",
+            description: "Generate PropTypes definition for component",
+            default: true
         },
         // recursive: {
         //     type: "boolean",
         //     alias: "r",
         //     description: "Recursively run through directories from path",
         //     default: false
-        // },
-        jsx: {
-            type: "boolean",
-            alias: "j",
-            description: "Use jsx file extensions",
-            default: false
-        }
+        // }
     })
     .parse()
 
 const run = (): void => {
-    const {path, out, typescript, componentName, defaultExport, defaultClassName, directory, jsx} = argv
+    const {path, out, typescript, fileName, defaultExport, className, propTypes, directory, jsx} = argv
+    let {name} = argv
 
     const inputPath = join(process.cwd(), path)
     let outputPathPart: string
     const extension = `.${typescript ? "t" : "j"}s${jsx ? "x" : ""}`
     if (directory) {
-        outputPathPart = join(componentName.toLowerCase(), `index${extension}`)
+        outputPathPart = join(fileName.toLowerCase(), `index${extension}`)
     } else {
-        outputPathPart = `${componentName.toLowerCase()}${extension}`
+        outputPathPart = `${fileName.toLowerCase()}${extension}`
     }
     const outputPath = join(process.cwd(), out || "", outputPathPart)
 
     if (!validatePath(inputPath)) {
-        return
+        // TODO log error
+        return;
     }
+
+    if (!validateName(name)) {
+        // TODO log error
+        return;
+    }
+    name = capitaliseFirst(name);
 
     createList(inputPath).then((data: IIconList) => {
         logger.info(`Created list with ${Object.keys(data).length} items`)
-
-        const contents = getTemplate(data, typescript, componentName, defaultExport, defaultClassName)
-
+        const contents = getTemplate(data, name, typescript, defaultExport, className, propTypes)
         saveFile(outputPath, contents)
     })
 
-    logger.log(inputPath + " " + outputPath)
+    logger.log(outputPath)
 }
 
 run()
