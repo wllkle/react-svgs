@@ -8,6 +8,12 @@ Transform a directory of SVG files into easily usable React components.
 npm install react-scripts-svg --save-dev
 ```
 
+## Requirements
+
+- SVG file names must contain only English letters or hyphens, such as:
+  - `settings.svg`
+  - `alarm-clock.svg`
+
 ## CLI Usage
 
 `react-scripts-svg -p assets/svg -o src/components`
