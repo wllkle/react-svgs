@@ -3,13 +3,13 @@
 import yargs from "yargs"
 import {join} from "path"
 
-import {logger} from "./src/logger";
-import {IIconList} from "./src/interfaces";
-import {validatePath, validateName} from "./src/validation";
-import {capitaliseFirst} from "./src/strings";
-import {getTemplate} from "./src/templates";
-import {createList} from "./src/parse";
-import {saveFile} from "./src/save";
+import {logger} from "./logger";
+import {IIconList} from "./interfaces";
+import {validatePath, validateName} from "./validation";
+import {capitaliseFirst} from "./strings";
+import {getTemplate} from "./templates";
+import {createList} from "./parse";
+import {saveFile} from "./save";
 
 interface Arguments {
     path: string,

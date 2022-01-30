@@ -11,8 +11,8 @@ npm install react-scripts-svg --save-dev
 ## Requirements
 
 - SVG file names must contain only English letters or hyphens, such as:
-  - `settings.svg`
-  - `alarm-clock.svg`
+  - `settings.svg` -> `settings`
+  - `alarm-clock.svg` -> `alarmClock`
 
 ## CLI Usage
 
