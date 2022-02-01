@@ -33,7 +33,7 @@ The script below can be run using `npm run svg`
     ...
     "scripts": {
         ...
-        "svg": "react-scripts-svg -p assets/svg -o src/components -d"
+        "svg": "react-scripts-svg -p assets/svg -o src/components"
     }
 }
 ```
@@ -43,15 +43,13 @@ The script below can be run using `npm run svg`
 | Parameter           | Description                                 | Type    | Default | Required |
 |---------------------|---------------------------------------------|---------|---------|----------|
 | --path, -p          | Path to directory containing SVG files      | string  |         | true     |
-| --out, -o           | Output path                                 | string  |         | true     |
+| --out, -o           | Output path (directory will be created)     | string  |         | true     |
 | --typescript, -t    | Output TypeScript files                     | boolean | true    | false    |
-| --name, -n          | Generated React component name              | string  | icon    | false    |
-| --directory, -d     | Generate directory containing component     | boolean | false   | false    |
-| --fileName, -f      | File/directory name for generated component | string  | Icon    | false    |
-| --defaultExport, -x | Use default exports                         | boolean | true    | false    |
-| --className, -c     | Default className for generated component   | string  | icon    | false    |
+| --name, -n          | Generated directory name                    | string  | icon    | false    |
+| --component, -c     | Generated React component name              | string  | Icon    | false    |
+| --defaultExport, -x | Use default exports                         | boolean | false   | false    |
 | --jsx, -j           | Use JSX file extensions (.jsx, .tsx)        | boolean | true    | false    |
-| --propTypes, --pt   | Generate PropTypes definition for component | boolean | true    | false    |
+| --propTypes, --pt   | Generate PropTypes definition for component | boolean | false   | false    |
 
 ## Component Usage
 

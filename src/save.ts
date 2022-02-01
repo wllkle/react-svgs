@@ -1,23 +1,23 @@
 import {mkdir, writeFile} from "fs"
-
-const getDirName = require("path").dirname
+import {join} from "path"
 
 import {logger} from "./logger"
 
-export const saveFile = (path: string, contents: string) => {
-    mkdir(getDirName(path), {recursive: true}, (err) => {
+const getDirName = require("path").dirname
+
+export const saveFile = (path: string, name: string, contents: string) => {
+    const savePath = join(path, name);
+    mkdir(getDirName(savePath), {recursive: true}, (err) => {
         if (err) {
             logger.error(err.message)
             return
         }
 
-        writeFile(path, contents, err => {
+        writeFile(savePath, contents, err => {
             if (err) {
                 logger.error(err.message)
                 return
             }
-
-            logger.info("Icons generated")
         })
     })
 }

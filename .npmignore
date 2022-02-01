@@ -1,5 +1,9 @@
 /tests
 *.ts
+*.tsx
 *.js.map
 .idea
 *.log
+yarn.lock
+package-lock.json
+tsconfig.json
