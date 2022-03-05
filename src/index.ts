@@ -5,9 +5,9 @@ import {join} from "path"
 
 import {logger} from "./logger";
 import {IIconList} from "./interfaces";
-import {validateName, validatePath} from "./validation";
-import {capitaliseFirst} from "./strings";
-import {getDefsTemplate, getTemplate} from "./templates";
+import {Validate} from "./validate";
+import {capitaliseFirst, extension} from "./strings";
+import {getTypesTemplate, getTemplate} from "./templates";
 import {createList} from "./parse";
 import {saveFile} from "./save";
 
@@ -15,9 +15,8 @@ interface Arguments {
     path: string,
     out?: string,
     typescript?: boolean,
-    name?: string,
     component?: string,
-    defaultExport?: boolean,
+    directory?: string,
     jsx?: boolean,
     propTypes?: boolean,
     // recursive?: boolean
@@ -44,23 +43,17 @@ const argv: Arguments = yargs(process.argv.slice(2))
             description: "Output TypeScript files",
             default: true
         },
-        name: {
-            type: "string",
-            alias: "n",
-            description: "Directory name for generated icon component",
-            default: "icon"
-        },
         component: {
             type: "string",
             alias: "c",
             description: "React component name",
-            default: "Icon"
+            default: "SVG"
         },
-        defaultExport: {
-            type: "boolean",
-            alias: "x",
-            description: "Use default exports",
-            default: false
+        directory: {
+            type: "string",
+            alias: "d",
+            description: "Directory name for generated SVG component",
+            default: "svg"
         },
         jsx: {
             type: "boolean",
@@ -82,36 +75,33 @@ const argv: Arguments = yargs(process.argv.slice(2))
         //     default: false
         // }
     })
-    .parse()
+    .parse();
 
 const run = (): void => {
-    const {path, out, typescript, name, defaultExport, propTypes, jsx} = argv
-    let {component} = argv
+    const {path, out, typescript, directory, propTypes, jsx} = argv;
+    let {component} = argv;
 
-    const inputPath = join(process.cwd(), path)
-    const outputPath = join(process.cwd(), out || "", name.toLowerCase())
-    const withExtension = (value: string) => `${value}.${typescript ? "t" : "j"}s${jsx ? "x" : ""}`
+    const inputPath = join(process.cwd(), path);
+    const outputPath = join(process.cwd(), out || "", directory.toLowerCase());
 
-    if (!validatePath(inputPath)) {
-        // TODO log error
-        return;
-    }
+    const ext = extension(typescript, jsx);
 
-    if (!validateName(component)) {
-        // TODO log error
-        return;
-    }
+    const withExtension = (value: string) => `${value}.${ext}`;
+
+    if (!Validate.Path(inputPath)) return;
+    if (!Validate.Name(component)) return;
+
     component = capitaliseFirst(component);
 
     createList(inputPath).then((data: IIconList) => {
-        logger.info(`Created list with ${Object.keys(data).length} items`)
-        const contents = getTemplate(data, component, typescript, defaultExport, propTypes)
-        saveFile(outputPath, withExtension("index"), contents)
-        const defs = getDefsTemplate(data, typescript)
-        saveFile(outputPath, withExtension("defs"), defs)
+        logger.info(`Created list with ${Object.keys(data).length} items`);
+
+        const contents = getTemplate(data, component, typescript, propTypes);
+        saveFile(outputPath, withExtension("index"), contents);
+
+        const types = getTypesTemplate(data, typescript);
+        saveFile(outputPath, withExtension("types"), types);
     })
+};
 
-    logger.log(outputPath)
-}
-
-run()
+run();

@@ -19,3 +19,9 @@ export const buildNameObj = (str: string): IIconName => {
         hyphen
     };
 };
+
+export const extension = (typescript: boolean, jsx: boolean) => {
+    let ext = typescript ? "ts" : "js";
+    if (jsx) ext += "x";
+    return ext;
+}
