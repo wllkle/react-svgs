@@ -18,7 +18,7 @@ npm install react-scripts-svg --save-dev
 
 `react-scripts-svg -p src/assets/svg -o src/components`
 
-This will take SVG files from a directory `src/assets/svg` and generate a component within a folder called `components`, with the full path to the component being `src/components/icon.tsx`
+This will take SVG files from a directory `src/assets/svg` and generate a component within a folder called `components`, with the full path to the component being `src/components/svg/index.tsx`
 
 `react-scripts-svg -p src/assets/svg -o src/components -t false -d`
 
@@ -46,8 +46,8 @@ The script below can be run using `npm run svg`
 | --path, -p          | Path to directory containing SVG files      | string  |         | true     |
 | --out, -o           | Output path (directory will be created)     | string  |         | true     |
 | --typescript, -t    | Output TypeScript files                     | boolean | true    | false    |
-| --component, c      | Generated React component name              | string  | icon    | false    |
-| --directory, -d     | Generated directory name                    | string  | Icon    | false    |
+| --component, c      | Generated React component name              | string  | svg     | false    |
+| --directory, -d     | Generated directory name                    | string  | SVG     | false    |
 | --jsx, -j           | Use JSX file extensions (.jsx, .tsx)        | boolean | true    | false    |
 | --propTypes, --pt   | Generate PropTypes definition for component | boolean | false   | false    |
 
