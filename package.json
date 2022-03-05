@@ -1,11 +1,11 @@
 {
     "name": "react-scripts-svg",
-    "version": "0.0.33",
+    "version": "0.0.34",
     "description": "Transform a directory of SVG files into easily usable React components.",
     "main": "./src/index.js",
     "scripts": {
         "build": "tsc",
-        "test": "npm run build && node src/index.js -p tests/data -o test-results"
+        "test": "npm run build && node src/index.js -p tests/data -o tests/results"
     },
     "bin": {
         "react-scripts-svg": "./src/index.js"

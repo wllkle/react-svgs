@@ -99,7 +99,7 @@ const run = (): void => {
         const contents = getTemplate(data, component, typescript, propTypes);
         saveFile(outputPath, withExtension("index"), contents);
 
-        const types = getTypesTemplate(data, typescript);
+        const types = getTypesTemplate(data, component, typescript);
         saveFile(outputPath, withExtension("types"), types);
     })
 };

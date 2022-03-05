@@ -24,38 +24,17 @@ export const getTemplate = (
     return `${warningComment}${ts("\n\n// @ts-nocheck")}
 
 import React${ts(", {ReactNode, CSSProperties}")} from "react";${propTypes ? `\nimport PropTypes from "prop-types";` : ""}
-import {iconList${propTypes ? ", IconTypesArray" : ""}${ts(", IconTypes, INode")}} from "./types";
+import {data${propTypes ? `, ${name}TypesArray` : ""}${ts(`, ${name}Types, INode`)}} from "./types";
 
-const printableElements${ts(": string[]")} = ["title", "style"];
-${ts(`\ninterface IconProps {
-    name: IconTypes,
+${ts(`\ninterface ${name}Props {
+    name: ${name}Types,
     className?: string,
     style?: CSSProperties
 }`)}
 
-const renderChildNodes = (nodes${ts(": INode[]")}): ReactNode => (
-    <>
-        {nodes.map((node${ts(": INode")}) => {
-            const {name, attributes, children} = node;
-            const Tag = name.toString();
-            const id = Math.random().toString(36).substring(2, 8);
-
-            if (printableElements.includes(name)) {
-                if (node.children.length > 0) {
-                    const {value} = node.children[0]
-
-                    return (<Tag key={id}>{value}</Tag>);
-                }
-            }
-
-            return (<Tag key={id} {...attributes}>{renderChildNodes(children)}</Tag>);
-        })}
-    </>
-);
-
-export const ${name} = (props${ts(": IconProps")}) => {
+export const ${name} = (props${ts(`: ${name}Props`)}) => {
     const {name, className = undefined, style = undefined} = props;
-    const iconData = iconList[name] ? iconList[name] : undefined;
+    const iconData = data[name] ? data[name] : undefined;
     const {viewBox, element} = iconData || {};
 
     const svgProps = {
@@ -70,8 +49,22 @@ export const ${name} = (props${ts(": IconProps")}) => {
     );
 }${propTypes ? `\n\n${name}${getPropTypes}` : ""}
 
+const renderChildNodes = (nodes${ts(": INode[]")}): ReactNode => (
+    <>
+        {nodes.map((node${ts(": INode")}) => {
+            const {name, attributes, type, value, children} = node;
+            const Tag = name.toString();
+            const id = Math.random().toString(36);
+
+            if (type === "print") return (<Tag key={id}>{value}</Tag>);
+
+            return (<Tag key={id} {...attributes}>{renderChildNodes(children)}</Tag>);
+        })}
+    </>
+);
+
 export default ${name};
-export {IconTypesArray} from "./defs";${ts("\nexport type {IconTypes} from \"./defs\";")}
+export {${name}TypesArray} from "./defs";${ts(`\nexport type {${name}Types} from "./defs";`)}
 `;
 }
 
@@ -81,8 +74,8 @@ const getPropTypes: string = `.propTypes = {
     style: PropTypes.object
 }`
 
-export const getTypesTemplate = (content: IIconList, typescript: boolean) => {
-    const iconList = clean(content)
+export const getTypesTemplate = (content: IIconList, name: string, typescript: boolean) => {
+    const list = clean(content)
     const iconTypes = Object.keys(content).map(key => `"${key}"`)
     const iconTypesArray = iconTypes.join(",\n\t")
 
@@ -92,12 +85,12 @@ export const getTypesTemplate = (content: IIconList, typescript: boolean) => {
         return `export interface INode {
     name: string,
     type: string,
-    value: string,
+    value?: string,
     attributes: object,
     children: INode[]
 }
 
-interface IIconList {
+interface I${name}Data {
     [key: string]: {
         name: string,
         viewBox: string,
@@ -105,19 +98,19 @@ interface IIconList {
     }
 }
 
-export const iconList: IIconList = ${iconList};
+export const data: I${name}Data = ${list};
         
-export type IconTypes = ${iconTypesUnion};
+export type ${name}Types = ${iconTypesUnion};
 
-export const IconTypesArray: string[] = [
+export const ${name}TypesArray: string[] = [
     ${iconTypesArray}
 ];
 `;
     }
 
-    return `export const iconList = ${iconList};
+    return `export const data = ${list};
     
-export const IconTypesArray = [
+export const ${name}TypesArray = [
     ${iconTypesArray}
 ];
 `;

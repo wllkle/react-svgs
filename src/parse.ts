@@ -5,6 +5,7 @@ import {parse as parseSvg} from "svgson";
 import {IIconList, INode} from "./interfaces"
 import {buildNameObj} from "./strings"
 import {logger} from "./logger";
+import {underline} from "cli-color";
 
 export const createList = (directory: string): Promise<IIconList> => {
     return new Promise<IIconList>((resolve, reject) => {
@@ -40,22 +41,41 @@ export const createList = (directory: string): Promise<IIconList> => {
 
 const parseChildren = (children: INode[]) => {
     return children.map(child => {
-        let {attributes, children} = child
-        children = parseChildren(children);
+        let {name, value, type, attributes, children} = child;
+
+        if (printableElements.includes(name)) {
+            type = "print";
+
+            if (children.length > 0) {
+                value = children[0].value;
+            } else {
+                value = "";
+            }
+
+            children = []
+        } else {
+            value = undefined;
+            children = parseChildren(children);
+        }
+
         Object.keys(attributes).forEach(attr => {
-            if(attr.includes("-")) {
+            if (attr.includes("-")) {
                 const value = attributes[attr];
                 const nameObj = buildNameObj(attr);
                 delete attributes[attr];
                 attributes[nameObj.camel] = value;
             }
-            if(attr === "class") {
+
+            if (attr === "class") {
                 const value = attributes[attr];
                 delete attributes[attr];
                 attributes["className"] = value;
             }
         });
 
-        return {...child, attributes, children};
+
+        return {...child, type, value, attributes, children};
     });
 }
+
+const printableElements: string[] = ["title", "style"];
