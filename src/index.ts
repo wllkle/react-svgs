@@ -7,7 +7,7 @@ import {logger} from "./logger";
 import {IIconList} from "./interfaces";
 import {Validate} from "./validate";
 import {capitaliseFirst, extension} from "./strings";
-import {getTypesTemplate, getTemplate} from "./templates";
+import {getTemplate, getTypesTemplate} from "./templates";
 import {createList} from "./parse";
 import {saveFile} from "./save";
 
@@ -86,7 +86,7 @@ const run = (): void => {
 
     const ext = extension(typescript, jsx);
 
-    const withExtension = (value: string) => `${value}.${ext}`;
+    const withExtension = (value: string, short: boolean = false) => `${value}.${short ? ext.substring(0, 2) : ext}`;
 
     if (!Validate.Path(inputPath)) return;
     if (!Validate.Name(component)) return;
@@ -100,7 +100,7 @@ const run = (): void => {
         saveFile(outputPath, withExtension("index"), contents);
 
         const types = getTypesTemplate(data, component, typescript);
-        saveFile(outputPath, withExtension("types"), types);
+        saveFile(outputPath, withExtension("types", true), types);
     })
 };
 

@@ -5,7 +5,6 @@ import {parse as parseSvg} from "svgson";
 import {IIconList, INode} from "./interfaces"
 import {buildNameObj} from "./strings"
 import {logger} from "./logger";
-import {underline} from "cli-color";
 
 export const createList = (directory: string): Promise<IIconList> => {
     return new Promise<IIconList>((resolve, reject) => {
@@ -73,9 +72,14 @@ const parseChildren = (children: INode[]) => {
             }
         });
 
-
-        return {...child, type, value, attributes, children};
+        return {
+            name,
+            type,
+            ...(value !== "") && {value},
+            ...(Object.keys(attributes).length > 0) && {attributes},
+            ...(children?.length > 0) && {children},
+        };
     });
 }
 
-const printableElements: string[] = ["title", "style"];
+const printableElements: string[] = ["title", "desc", "style", "defs"];
