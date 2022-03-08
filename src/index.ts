@@ -11,6 +11,10 @@ import {getTemplate, getTypesTemplate} from "./templates";
 import {createList} from "./parse";
 import {saveFile} from "./save";
 
+import {listAllSVG, readSVG} from "./io";
+import {parse} from "./parser";
+import {optimizeSVG} from "./optimize";
+
 interface Arguments {
     path: string,
     out?: string,
@@ -92,6 +96,20 @@ const run = (): void => {
     if (!Validate.Name(component)) return;
 
     component = capitaliseFirst(component);
+
+    listAllSVG(inputPath).forEach((svg, i) => {
+        try {
+            if (i === 0) {
+                readSVG(svg);
+                optimizeSVG(svg);
+                parse(svg).then(r=>console.log(JSON.stringify(r, null ,4)))
+            }
+
+        } catch (e) {
+            logger.error(e.message);
+        }
+    });
+
 
     createList(inputPath).then((data: IIconList) => {
         logger.info(`Created list with ${Object.keys(data).length} items`);

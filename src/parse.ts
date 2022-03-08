@@ -3,7 +3,7 @@ import {extname, join} from "path";
 import {parse as parseSvg} from "svgson";
 
 import {IIconList, INode} from "./interfaces"
-import {buildNameObj} from "./strings"
+import {buildNameObj, getStyleObject} from "./strings"
 import {logger} from "./logger";
 
 export const createList = (directory: string): Promise<IIconList> => {
@@ -11,22 +11,26 @@ export const createList = (directory: string): Promise<IIconList> => {
         const iconList: IIconList = {};
         const allFiles: string[] = readdirSync(directory).filter((file: string) => extname(file) === ".svg");
 
-        allFiles.forEach(file => {
+        allFiles.forEach((file, i) => {
             const filePath = join(directory, file);
             const fileData = readFileSync(filePath).toString();
             const name = buildNameObj(file);
 
             parseSvg(fileData).then((result: any) => {
                 const {attributes} = result;
-                const {viewBox} = attributes;
+                const {viewBox, xmlns} = attributes;
                 let {children} = result
+
+                const xlink = attributes["xmlns:xlink"] || undefined;
 
                 children = parseChildren(children)
 
                 iconList[name.camel] = {
                     name: name.hyphen,
                     viewBox,
-                    element: children
+                    element: children,
+                    ...(xmlns) && {xmlns},
+                    ...(xlink) && {xmlnsXlink: xlink},
                 };
             }).catch((error: any) => {
                 logger.error(error.message)
@@ -59,16 +63,19 @@ const parseChildren = (children: INode[]) => {
 
         Object.keys(attributes).forEach(attr => {
             if (attr.includes("-")) {
-                const value = attributes[attr];
+                const val = attributes[attr];
                 const nameObj = buildNameObj(attr);
                 delete attributes[attr];
-                attributes[nameObj.camel] = value;
+                attributes[nameObj.camel] = val;
             }
 
             if (attr === "class") {
-                const value = attributes[attr];
+                const val = attributes[attr];
                 delete attributes[attr];
-                attributes["className"] = value;
+                attributes["className"] = val;
+            } else if (attr === "style") {
+                const val = attributes[attr];
+                attributes[attr] = getStyleObject(val);
             }
         });
 
@@ -82,4 +89,4 @@ const parseChildren = (children: INode[]) => {
     });
 }
 
-const printableElements: string[] = ["title", "desc", "style", "defs"];
+const printableElements: string[] = ["title", "desc", "style", "tspan"];

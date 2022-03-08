@@ -9,6 +9,8 @@ export interface INode {
 export interface IIcon {
     name: string,
     viewBox: string,
+    xmlns?: string,
+    xlink?: string,
     element: INode[]
 }
 

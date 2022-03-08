@@ -34,12 +34,14 @@ ${ts(`\ninterface ${name}Props {
 export const ${name} = (props${ts(`: ${name}Props`)}) => {
     const {name, className = undefined, style = undefined} = props;
     const iconData = data[name] ? data[name] : undefined;
-    const {viewBox, element} = iconData || {};
+    const {viewBox, element, xmlns, xmlnsXlink} = iconData || {};
 
     const svgProps = {
         ...(className) && {className},
         ...(style) && {style},
         ...(viewBox) && {viewBox},
+        ...(xmlns) && {xmlns},
+        ...(xmlnsXlink) && {xmlnsXlink},
         ...(element) && {children: renderChildNodes(element)}
     };
     
@@ -93,6 +95,8 @@ interface I${name}Data {
     [key: string]: {
         name: string,
         viewBox: string,
+        xmlns?: string,
+        xmlnsXlink?: string,
         element: INode[]
     }
 }
