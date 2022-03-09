@@ -12,7 +12,6 @@ export const parseArgs = (args: CLIArgs) => new Promise<SVGArgs>((resolve, rejec
     const name = component.trim();
     const typescript = !!args.typescript;
     const propTypes = !!args.propTypes;
-    const optimize = !!args.optimize;
     const input = join(cwd, path.trim());
 
     const ext: string = typescript ? "ts" : "js";
@@ -32,5 +31,5 @@ export const parseArgs = (args: CLIArgs) => new Promise<SVGArgs>((resolve, rejec
         reject();
     }
 
-    resolve({input, output, name, optimize, typescript, propTypes});
+    resolve({input, output, name, typescript, propTypes});
 })

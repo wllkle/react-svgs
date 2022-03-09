@@ -5,10 +5,10 @@ import {SVGDataList} from "../util";
 import {logger} from "../logger";
 import {getNameObj, getStyleObject} from "../strings";
 
-export const parseList = (files: SVGFile[], optimize: boolean): Promise<SVGList> => {
+export const parseList = (files: SVGFile[]): Promise<SVGList> => {
     const queue: Promise<SVGData>[] = files.map((file: SVGFile) => new Promise<SVGData>((resolve, reject) => {
         try {
-            if (optimize) optimizeSVG(file);
+            optimizeSVG(file);
             parseFile(file).then(resolve).catch(reject);
         } catch (error) {
             reject(error);

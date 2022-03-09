@@ -6,7 +6,6 @@ declare global {
         component?: string,
         directory?: string,
         jsx?: boolean,
-        optimize?: boolean,
         propTypes?: boolean,
         // recursive?: boolean
     }
@@ -18,7 +17,6 @@ declare global {
             types: string
         },
         name: string,
-        optimize: boolean,
         typescript: boolean,
         propTypes: boolean
     }

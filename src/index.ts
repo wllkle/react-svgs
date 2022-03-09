@@ -1,9 +1,6 @@
 #!/usr/bin/env node
 
 import yargs from "yargs"
-import {join} from "path"
-
-import {capitaliseFirst, extension} from "./strings";
 
 import {listAllSVG, saveFile} from "./io";
 import {parseList} from "./parser";
@@ -49,12 +46,6 @@ const argv: CLIArgs = yargs(process.argv.slice(2))
             description: "Use JSX file extensions (.jsx, .tsx)",
             default: true
         },
-        optimize: {
-            type: "boolean",
-            alias: "z",
-            description: "Optimize SVGs using SVGO",
-            default: true
-        },
         propTypes: {
             type: "boolean",
             alias: "pt",
@@ -74,11 +65,11 @@ const argv: CLIArgs = yargs(process.argv.slice(2))
 const run = (): void => {
     parseArgs(argv)
         .then((args: SVGArgs) => {
-            const {input, output, name, optimize, typescript, propTypes} = args;
+            const {input, output, name, typescript, propTypes} = args;
 
             const fileList: SVGFile[] = listAllSVG(input);
 
-            parseList(fileList, optimize).then((result: SVGList) => {
+            parseList(fileList).then((result: SVGList) => {
                 const options = {name, result, typescript, propTypes};
 
                 const component = getTemplatedFile("component", options);
