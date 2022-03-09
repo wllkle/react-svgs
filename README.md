@@ -11,30 +11,37 @@ npm install react-scripts-svg --save-dev
 ## Requirements
 
 - SVG file names must contain only letters or hyphens, such as:
-  - `settings.svg` -> `settings`
-  - `alarm-clock.svg` -> `alarmClock`
+    - `settings.svg` -> `settings`
+    - `alarm-clock.svg` -> `alarmClock`
 
 ## CLI Usage
 
 `react-scripts-svg -p src/assets/svg -o src/components`
 
-This will take SVG files from a directory `src/assets/svg` and generate a component within a folder called `components`, with the full path to the component being `src/components/svg/index.tsx`
+This will take SVG files from a directory `src/assets/svg` and generate a component within a folder called `components`,
+with the full path to the component being `src/components/svg/index.ts`
 
 `react-scripts-svg -p src/assets/svg -o src/components -t false -d`
 
-This will do the same as above, but generate a JavaScript file instead of TypeScript; and the file will be called `index.jsx` inside a directory - with the full path to the component being `src/components/icon/index.jsx` 
+This will do the same as above, but generate a JavaScript file instead of TypeScript; and the file will be
+called `index.jsx` inside a directory - with the full path to the component being `src/components/icon/index.jsx`
 
 ### Usage in package.json
 
 The script below can be run using `npm run svg`
 
 ##### package.json
+
 ```javascript
 {
+...
+    "scripts"
+:
+    {
     ...
-    "scripts": {
-        ...
-        "svg": "react-scripts-svg -p src/assets/svg -o src/components"
+        "svg"
+    :
+        "react-scripts-svg -p src/assets/svg -o src/components"
     }
 }
 ```
@@ -55,12 +62,13 @@ The script below can be run using `npm run svg`
 
 This example assumes all default values are used.
 
-##### src/components/settings-icon/index.tsx
+##### src/components/settings-icon/index.ts
+
 ```typescript jsx
 import React from "react"
 import Icon from "../icon"
 
 export const SettingsIcon = () => (
-    <Icon name="settings" className="settings-icon" style={{fill: "red"}} />
+    <Icon name="settings" className="settings-icon" style={{fill: "red"}}/>
 );
 ```

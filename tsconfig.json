@@ -1,14 +1,14 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "isolatedModules": false,
-    "jsx": "react"
-  },
-  "exclude": [
-    "node_modules",
-    "tests"
-  ]
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "isolatedModules": false,
+        "jsx": "react"
+    },
+    "exclude": [
+        "node_modules",
+        "tests"
+    ]
 }
