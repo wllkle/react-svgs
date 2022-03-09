@@ -1,6 +1,6 @@
 import {optimize} from "svgo";
 
-export const optimizeSVG = (value: SVGItem): void => {
+export const optimizeSVG = (value: SVGFile): void => {
     const result = optimize(value.data);
 
     if ("data" in result) {

@@ -1,22 +1,45 @@
-export {};
-
 declare global {
+    interface CLIArgs {
+        path: string,
+        out: string,
+        typescript?: boolean,
+        component?: string,
+        directory?: string,
+        jsx?: boolean,
+        optimize?: boolean,
+        propTypes?: boolean,
+        // recursive?: boolean
+    }
+
+    interface SVGArgs {
+        input: string,
+        output: {
+            index: string,
+            types: string
+        },
+        name: string,
+        optimize: boolean,
+        typescript: boolean,
+        propTypes: boolean
+    }
+
     interface SVGName {
         camel: string,
         hyphen: string
     }
 
-    interface SVGItem {
+    interface SVGFile {
         name: SVGName,
-        path: string,
-        data?: string
+        data: string
     }
+
+    type SVGAttributes = Record<string, string | object>
 
     interface SVGNode {
         name: string,
         type: string,
-        value: string,
-        attributes?: Record<string, string>,
+        value?: string,
+        attributes?: SVGAttributes,
         children?: SVGNode[]
     }
 
@@ -24,4 +47,14 @@ declare global {
         name: SVGName,
         element: SVGNode
     }
+
+    interface SVGList {
+        [key: string]: {
+            name: string,
+            attributes?: SVGAttributes,
+            children: SVGNode[]
+        }
+    }
 }
+
+export {};

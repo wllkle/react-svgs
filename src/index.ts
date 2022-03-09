@@ -3,31 +3,16 @@
 import yargs from "yargs"
 import {join} from "path"
 
-import {logger} from "./logger";
-import {IIconList} from "./interfaces";
-import {Validate} from "./validate";
 import {capitaliseFirst, extension} from "./strings";
-import {getTemplate, getTypesTemplate} from "./templates";
-import {createList} from "./parse";
 import {saveFile} from "./save";
 
-import {listAllSVG, readSVG} from "./io";
-import {parse} from "./parser";
-import {optimizeSVG} from "./optimize";
-
-interface Arguments {
-    path: string,
-    out?: string,
-    typescript?: boolean,
-    component?: string,
-    directory?: string,
-    jsx?: boolean,
-    propTypes?: boolean,
-    // recursive?: boolean
-}
+import {listAllSVG} from "./io";
+import {parseList} from "./parser";
+import {parseArgs} from "./args";
+import {getTemplatedFile} from "./templates";
 
 // @ts-ignore
-const argv: Arguments = yargs(process.argv.slice(2))
+const argv: CLIArgs = yargs(process.argv.slice(2))
     .options({
         path: {
             type: "string",
@@ -65,6 +50,12 @@ const argv: Arguments = yargs(process.argv.slice(2))
             description: "Use JSX file extensions (.jsx, .tsx)",
             default: true
         },
+        optimize: {
+            type: "boolean",
+            alias: "z",
+            description: "Optimize SVGs using SVGO",
+            default: true
+        },
         propTypes: {
             type: "boolean",
             alias: "pt",
@@ -82,44 +73,26 @@ const argv: Arguments = yargs(process.argv.slice(2))
     .parse();
 
 const run = (): void => {
-    const {path, out, typescript, directory, propTypes, jsx} = argv;
-    let {component} = argv;
+    parseArgs(argv)
+        .then((args: SVGArgs) => {
+            const {input, output, name, optimize, typescript, propTypes} = args;
 
-    const inputPath = join(process.cwd(), path);
-    const outputPath = join(process.cwd(), out || "", directory.toLowerCase());
+            const fileList: SVGFile[] = listAllSVG(input);
 
-    const ext = extension(typescript, jsx);
+            parseList(fileList, optimize).then((result: SVGList) => {
+                console.log("\n\n");
+                console.log(JSON.stringify(result, null, 4));
+                console.log("\n\n");
 
-    const withExtension = (value: string, short: boolean = false) => `${value}.${short ? ext.substring(0, 2) : ext}`;
+                const options = {name, result, typescript, propTypes};
 
-    if (!Validate.Path(inputPath)) return;
-    if (!Validate.Name(component)) return;
+                const component = getTemplatedFile("component", options);
+                saveFile(output.index, component);
 
-    component = capitaliseFirst(component);
-
-    listAllSVG(inputPath).forEach((svg, i) => {
-        try {
-            if (i === 0) {
-                readSVG(svg);
-                optimizeSVG(svg);
-                parse(svg).then(r=>console.log(JSON.stringify(r, null ,4)))
-            }
-
-        } catch (e) {
-            logger.error(e.message);
-        }
-    });
-
-
-    createList(inputPath).then((data: IIconList) => {
-        logger.info(`Created list with ${Object.keys(data).length} items`);
-
-        const contents = getTemplate(data, component, typescript, propTypes);
-        saveFile(outputPath, withExtension("index"), contents);
-
-        const types = getTypesTemplate(data, component, typescript);
-        saveFile(outputPath, withExtension("types", true), types);
-    })
+                const types = getTemplatedFile("types", options);
+                saveFile(output.types, types);
+            });
+        });
 };
 
 run();

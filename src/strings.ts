@@ -3,9 +3,6 @@ export interface IIconName {
     hyphen: string
 }
 
-export const DEFAULT_XMLNS = "";
-export const DEFAULT_XLINK = "";
-
 export const capitaliseFirst = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
 };
