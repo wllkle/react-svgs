@@ -65,6 +65,7 @@ export const SettingsIcon = () => (
 | name*     | string                                                            | ✔        |
 | className | string                                                            | ❌        |
 | style     | [CSSProperties](https://reactjs.org/docs/dom-elements.html#style) | ❌        |
+
 _* name prop must be one of the strings exported in `types.js / types.ts` - if using TypeScript this will be enforced._
 
 ## Assumptions
