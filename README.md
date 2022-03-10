@@ -1,37 +1,41 @@
 # react-scripts-svg :rocket:
 
-Transform a directory of SVG files into easily usable React components.
+Transform a directory of SVG files into an easily usable React component.
 
 ## Installation
 
 ```shell
 npm install react-scripts-svg --save-dev
+yarn add -D react-scripts-svg
 ```
 
-## Requirements
+## Usage
 
-- SVG file names must contain only letters or hyphens, such as:
-    - `settings.svg` -> `settings`
-    - `alarm-clock.svg` -> `alarmClock`
+    react-scripts-svg -p src/assets/svg -o src/components -t -d vector
 
-## CLI Usage
+This will take SVG files from directory `src/assets/svg` and generate files containing the component and SVG data. From
+the working directory where the command is executed; the generated files will be:
 
-    `react-scripts-svg -p src/assets/svg -o src/components`
+- `src/components/vector/index.tsx` - component
+- `src/components/vector/types.ts` - data, TypeScript types (if `-t` flag is provided)
 
-This will take SVG files from a directory `src/assets/svg` and generate a component within a folder called `components`,
-with the full path to the component being `src/components/svg/index.ts`
+### Parameters
 
-    `react-scripts-svg -p src/assets/svg -o src/components`
-
-This will do the same as above, but generate a JavaScript file instead of TypeScript; and the file will be
-called `index.jsx` inside a directory - with the full path to the component being `src/components/icon/index.jsx`
+| Parameter           | Description                                 | Type    | Default | Required |
+|---------------------|---------------------------------------------|---------|---------|----------|
+| --path, -p          | Path to directory containing SVG files      | string  |         | ✔        |
+| --out, -o           | Output path (directory will be created)     | string  |         | ✔        |
+| --typescript, -t    | Output TypeScript files                     | boolean | false   | ❌        |
+| --component, c      | Generated React component name              | string  | svg     | ❌        |
+| --directory, -d     | Generated directory name                    | string  | SVG     | ❌        |
+| --jsx, -j           | Use JSX file extensions (.jsx, .tsx)        | boolean | true    | ❌        |
+| --propTypes, --pt   | Generate PropTypes definition for component | boolean | false   | ❌        |
 
 ### Usage in package.json
 
 The script below can be run using `npm run svg`
 
 ##### package.json
-
 ```json
 {
     "scripts": {
@@ -40,24 +44,11 @@ The script below can be run using `npm run svg`
 }
 ```
 
-### Parameters
-
-| Parameter           | Description                                 | Type    | Default | Required |
-|---------------------|---------------------------------------------|---------|---------|----------|
-| --path, -p          | Path to directory containing SVG files      | string  |         | true     |
-| --out, -o           | Output path (directory will be created)     | string  |         | true     |
-| --typescript, -t    | Output TypeScript files                     | boolean | true    | false    |
-| --component, c      | Generated React component name              | string  | svg     | false    |
-| --directory, -d     | Generated directory name                    | string  | SVG     | false    |
-| --jsx, -j           | Use JSX file extensions (.jsx, .tsx)        | boolean | true    | false    |
-| --propTypes, --pt   | Generate PropTypes definition for component | boolean | false   | false    |
-
-## Component Usage
+### Component Usage
 
 This example assumes all default values are used.
 
 ##### src/components/settings-icon/index.ts
-
 ```typescript jsx
 import React from "react"
 import Icon from "../icon"
@@ -66,3 +57,17 @@ export const SettingsIcon = () => (
     <Icon name="settings" className="settings-icon" style={{fill: "red"}}/>
 );
 ```
+
+### Component Props
+
+| Prop      | Type                                                              | Required |
+|-----------|-------------------------------------------------------------------|----------|
+| name*     | string                                                            | ✔        |
+| className | string                                                            | ❌        |
+| style     | [CSSProperties](https://reactjs.org/docs/dom-elements.html#style) | ❌        |
+_* name prop must be one of the strings exported in `types.js / types.ts` - if using TypeScript this will be enforced._
+
+## Assumptions
+- SVG file names must contain only letters or hyphens, such as:
+    - `settings.svg` -> `settings`
+    - `alarm-clock.svg` -> `alarmClock`
