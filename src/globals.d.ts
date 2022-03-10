@@ -1,5 +1,12 @@
+import {Options} from "yargs";
+
 declare global {
+    interface CLIOptions {
+        [key: string]: Options
+    }
+
     interface CLIArgs {
+        file?: string,
         path: string,
         out: string,
         typescript?: boolean,
@@ -10,14 +17,26 @@ declare global {
         // recursive?: boolean
     }
 
-    interface SVGArgs {
+    interface PathObject {
+        full: string,
+        short: string
+    }
+
+    interface UnvalidatedSVGArgs {
         input: string,
-        output: {
-            index: string,
-            types: string
-        },
+        output: string,
         name: string,
         typescript: boolean,
+        jsx: boolean,
+        propTypes: boolean
+    }
+
+    interface SVGArgs {
+        input: PathObject,
+        output: PathObject,
+        name: string,
+        typescript: boolean,
+        jsx: boolean,
         propTypes: boolean
     }
 

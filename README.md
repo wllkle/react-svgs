@@ -16,12 +16,12 @@ npm install react-scripts-svg --save-dev
 
 ## CLI Usage
 
-`react-scripts-svg -p src/assets/svg -o src/components`
+    `react-scripts-svg -p src/assets/svg -o src/components`
 
 This will take SVG files from a directory `src/assets/svg` and generate a component within a folder called `components`,
 with the full path to the component being `src/components/svg/index.ts`
 
-`react-scripts-svg -p src/assets/svg -o src/components -t false -d`
+    `react-scripts-svg -p src/assets/svg -o src/components`
 
 This will do the same as above, but generate a JavaScript file instead of TypeScript; and the file will be
 called `index.jsx` inside a directory - with the full path to the component being `src/components/icon/index.jsx`
@@ -32,16 +32,10 @@ The script below can be run using `npm run svg`
 
 ##### package.json
 
-```javascript
+```json
 {
-...
-    "scripts"
-:
-    {
-    ...
-        "svg"
-    :
-        "react-scripts-svg -p src/assets/svg -o src/components"
+    "scripts": {
+        "svg": "react-scripts-svg -p src/assets/svg -o src/components"
     }
 }
 ```
