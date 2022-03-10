@@ -66,7 +66,7 @@ export const SettingsIcon = () => (
 | className | string                                                            | ❌        |
 | style     | [CSSProperties](https://reactjs.org/docs/dom-elements.html#style) | ❌        |
 
-_* name prop must be one of the strings exported in `types.js / types.ts` - if using TypeScript this will be enforced._
+_* name prop must be one of the strings exported in `types.js` or `types.ts` - if using TypeScript this will be enforced._
 
 ## Assumptions
 - SVG file names must contain only letters or hyphens, such as:
