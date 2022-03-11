@@ -37,6 +37,7 @@ The script below can be run using `npm run svg`
 
 ```json5
 // package.json
+
 {
     "scripts": {
         "svg": "react-scripts-svg -p src/assets/svg -o src/components"
@@ -50,6 +51,7 @@ This example assumes all default values are used.
 
 ```typescript jsx
 // src/components/settings-icon/index.tsx
+
 import React from "react"
 import Icon from "../icon"
 
