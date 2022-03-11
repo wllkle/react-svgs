@@ -6,7 +6,8 @@
     "scripts": {
         "build": "tsc",
         "prepublish": "tsc",
-        "test": "node src/index.js -p tests/data/svg -o tests/results",
+        "test": "node src/entry.js",
+        "tesrt": "node src/entry.js -p tests/data/svg -o tests/results",
         "pretest": "npm run build"
     },
     "bin": {

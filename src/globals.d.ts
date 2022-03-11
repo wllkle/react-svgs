@@ -7,12 +7,14 @@ declare global {
 
     interface CLIArgs {
         file?: string,
-        path: string,
-        out: string,
+        path?: string,
+        out?: string,
         typescript?: boolean,
+        name?: string,
         component?: string,
         directory?: string,
         jsx?: boolean,
+        nojsx?: boolean,
         propTypes?: boolean,
         // recursive?: boolean
     }
@@ -20,15 +22,6 @@ declare global {
     interface PathObject {
         full: string,
         short: string
-    }
-
-    interface UnvalidatedSVGArgs {
-        input: string,
-        output: string,
-        name: string,
-        typescript: boolean,
-        jsx: boolean,
-        propTypes: boolean
     }
 
     interface SVGArgs {
@@ -73,5 +66,3 @@ declare global {
         }
     }
 }
-
-export {};

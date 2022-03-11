@@ -1,22 +1,9 @@
-// import {Options} from "yargs";
-import {Options} from "cosmiconfig";
+import yargs from "yargs";
 
-export const cosmiconfigOptions: Options = {
-    packageProp: "svg",
-    searchPlaces: [
-        "package.json",
-        "svgrc",
-        "svgrc.json",
-        "svgrc.yaml",
-        "svgrc.yml",
-        "svgrc.js",
-        "svgrc.cjs",
-        "svg.config.js",
-        "svg.config.cjs",
-    ]
-};
+// import {options} from "./options";
+import {validation} from "./middleware";
 
-export const options: CLIOptions = {
+const options: CLIOptions = {
     file: {
         type: "boolean",
         alias: "f",
@@ -41,9 +28,9 @@ export const options: CLIOptions = {
         description: "Output TypeScript files",
         default: true
     },
-    component: {
+    name: {
         type: "string",
-        alias: "c",
+        alias: "n",
         description: "React component name",
         default: "SVG"
     },
@@ -53,11 +40,11 @@ export const options: CLIOptions = {
         description: "Directory name for generated SVG component",
         default: "svg"
     },
-    jsx: {
+    nojsx: {
         type: "boolean",
         alias: "j",
         description: "Use JSX file extensions (.jsx, .tsx)",
-        default: true
+        default: false
     },
     propTypes: {
         type: "boolean",
@@ -67,10 +54,11 @@ export const options: CLIOptions = {
     }
 };
 
-// TODO: implement recursive (tree of svg directories)
-// recursive: {
-//     type: "boolean",
-//     alias: "r",
-//     description: "Recursively run through directories from path",
-//     default: false
-// }
+yargs(process.argv.slice(2))
+    .options(options)
+    .check(validation)
+    .parseAsync()
+    .then(console.log)
+    .catch(console.error);
+
+
