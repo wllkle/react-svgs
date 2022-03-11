@@ -1,11 +1,11 @@
-import {Options} from "yargs";
+import {InferredOptionTypes, Options} from "yargs";
 
 declare global {
     interface CLIOptions {
         [key: string]: Options
     }
 
-    interface CLIArgs {
+    interface CLIArgs extends InferredOptionTypes<CLIOptions> {
         file?: string,
         path?: string,
         out?: string,
@@ -16,6 +16,7 @@ declare global {
         jsx?: boolean,
         nojsx?: boolean,
         propTypes?: boolean,
+        absolute?: boolean,
         // recursive?: boolean
     }
 

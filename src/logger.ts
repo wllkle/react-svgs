@@ -1,6 +1,6 @@
 import cli from "cli-color"
 
-const APP_NAME = (color) => `[${color("react-scripts-svg")}]`
+const APP_NAME = (color) => `[${color("react-svgs")}]`
 
 export const logger = {
     colors: {

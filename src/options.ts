@@ -27,7 +27,8 @@ export const options: CLIOptions = {
     path: {
         type: "string",
         alias: "p",
-        description: "Path to directory containing SVG files"
+        description: "Path to directory containing SVG files",
+        required: false
     },
     out: {
         type: "string",

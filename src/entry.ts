@@ -1,32 +1,25 @@
 import yargs from "yargs";
 
-// import {options} from "./options";
-import {validation} from "./middleware";
+import {validate} from "./arg";
+import log from "./log";
 
 const options: CLIOptions = {
     file: {
         type: "boolean",
         alias: "f",
         description: "Load config from file.",
-        default: false,
-
+        default: false
     },
+
     path: {
         type: "string",
         alias: "p",
-        description: "Path to directory containing SVG files"
+        description: "Path to directory containing SVG files",
     },
     out: {
         type: "string",
         alias: "o",
-        description: "Output path (directory will be created)",
-
-    },
-    typescript: {
-        type: "boolean",
-        alias: "t",
-        description: "Output TypeScript files",
-        default: true
+        description: "Output path (directories will be created)"
     },
     name: {
         type: "string",
@@ -34,11 +27,11 @@ const options: CLIOptions = {
         description: "React component name",
         default: "SVG"
     },
-    directory: {
-        type: "string",
-        alias: "d",
-        description: "Directory name for generated SVG component",
-        default: "svg"
+    typescript: {
+        type: "boolean",
+        alias: "t",
+        description: "Output TypeScript files",
+        default: false
     },
     nojsx: {
         type: "boolean",
@@ -46,19 +39,24 @@ const options: CLIOptions = {
         description: "Use JSX file extensions (.jsx, .tsx)",
         default: false
     },
-    propTypes: {
+    absolute: {
         type: "boolean",
-        alias: "pt",
+        alias: "a",
+        description: "Use absolute paths instead of relative.",
+        default: false
+    },
+    "prop-types": {
+        type: "boolean",
         description: "Generate PropTypes definition for component",
         default: false
     }
 };
 
 yargs(process.argv.slice(2))
+    .pkgConf("svg")
     .options(options)
-    .check(validation)
+    .check(validate)
     .parseAsync()
-    .then(console.log)
-    .catch(console.error);
-
+    .then(res => log.info(JSON.stringify(res)))
+    .catch(log.warn);
 
