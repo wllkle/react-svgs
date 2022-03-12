@@ -1,35 +1,48 @@
-import {join} from "path";
-
+import {validateName, validatePath} from "./validators";
 import {logger} from "../logger";
+import {buildPathObject} from "../util";
 
-export const parseArgs = (args: CLIArgs) => new Promise<SVGArgs>((resolve, reject) => {
-    const {path, out, directory, component} = args;
+export const parseArgs = (args: UnparsedArgs) => new Promise<SVGArgs>((resolve, reject) => {
 
-    const cwd: string = process.cwd();
+    // TODO: start from here
+    // TODO: fix README
 
-    const outputPath = join(cwd, out.trim(), directory.trim());
+    const {input: inputPath, output: outputPath} = args;
+    let {name = ""} = args;
 
-    const name = component.trim();
-    const typescript = !!args.typescript;
+    name = name.trim();
+    const typescript = args.typescript || true;
     const propTypes = !!args.propTypes;
-    const input = join(cwd, path.trim());
+    const jsx = args.jsx || true;
 
-    const ext: string = typescript ? "ts" : "js";
-    const fullExt: string = !!args.jsx ? ext + "x" : ext;
+    const input = buildPathObject(inputPath);
+    const output = buildPathObject(outputPath);
 
+    const svgArgs: SVGArgs = {input, output, name, typescript, jsx, propTypes};
 
-    const output = {
-        index: join(outputPath, `index.${fullExt}`),
-        types: join(outputPath, `types.${ext}`)
-    };
+    validateArgs(svgArgs)
+        .then(() => resolve(svgArgs))
+        .catch(reason => {
+            logger.error(reason);
+            reject();
+        })
+});
 
-    // trim path, out, component and directory,
-
-
-    const invalid = (message: string) => {
-        logger.error(message);
-        reject();
+const validateArgs = (args: SVGArgs) => new Promise((resolve, reject) => {
+    if (!validateName(args.name)) {
+        reject("Name must only contain letters; no numbers, spaces or special characters");
+        return;
     }
 
-    resolve({input, output, name, typescript, propTypes});
-})
+    if (!validatePath(args.input)) {
+        reject(`No path exists at ${logger.colors.blue(args.input.short)}, please correct this and try again`);
+        return;
+    }
+
+    if (!validatePath(args.output)) {
+        // not an error
+        logger.warn(`No path exists at ${logger.colors.blue(args.output.short)}, directories will be created`);
+    }
+
+    resolve("");
+});

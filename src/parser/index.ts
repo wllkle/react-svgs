@@ -1,25 +1,26 @@
 import {INode, parse as svgson} from "svgson";
 
 import {optimizeSVG} from "../optimize";
-import {SVGDataList} from "../util";
+import {getNameObj, getStyleObject, SVGDataList} from "../util";
 import {logger} from "../logger";
-import {getNameObj, getStyleObject} from "../strings";
 
 export const parseList = (files: SVGFile[]): Promise<SVGList> => {
     const queue: Promise<SVGData>[] = files.map((file: SVGFile) => new Promise<SVGData>((resolve, reject) => {
-        try {
-            optimizeSVG(file);
-            parseFile(file).then(resolve).catch(reject);
-        } catch (error) {
-            reject(error);
-        }
+        optimizeSVG(file);
+        parseFile(file).then(resolve).catch(reject);
     }));
 
     return new Promise<SVGList>(resolve => {
         const svgDataList = new SVGDataList();
-        Promise.all(queue)
-            .then((result: SVGData[]) => {
-                result.forEach(svgDataList.append)
+        Promise.allSettled(queue)
+            .then((result) => {
+                result.filter(res => res.status === "fulfilled").forEach(item => {
+                    if ("value" in item) svgDataList.append(item.value);
+                });
+
+                result.filter(res => res.status === "rejected").forEach(item => {
+                    if ("reason" in item) logger.error(item.reason.message);
+                });
             })
             .catch(console.error)
             .finally(() => {
@@ -27,22 +28,20 @@ export const parseList = (files: SVGFile[]): Promise<SVGList> => {
                 resolve(svgDataList.list)
             });
     });
-}
+};
 
-export const parseFile = (data: SVGFile): Promise<SVGData> => {
-    return new Promise((resolve, reject) => {
-        svgson(data.data, {
-            camelcase: true
-        }).then((res: INode) => {
-            resolve({
-                name: data.name,
-                element: parseNode(res)
-            });
-        }).catch(error => {
-            reject(error);
+const parseFile = (data: SVGFile): Promise<SVGData> => new Promise((resolve, reject) => {
+    svgson(data.data, {
+        camelcase: true
+    }).then((res: INode) => {
+        resolve({
+            name: data.name,
+            element: parseNode(res)
         });
+    }).catch(error => {
+        reject(error);
     });
-}
+});
 
 const parseNode = (node: INode): SVGNode => {
     let {name, type, value} = node;
@@ -50,7 +49,6 @@ const parseNode = (node: INode): SVGNode => {
     let children;
 
     if (printableElements.includes(name)) {
-        console.log(name + " is in printableElements")
         type = "print";
 
         if (node.children.length > 0) {
@@ -58,7 +56,6 @@ const parseNode = (node: INode): SVGNode => {
         } else {
             value = undefined;
         }
-
     } else {
         children = node.children.length > 0 ? node.children.map(parseNode) : undefined;
     }
@@ -70,7 +67,7 @@ const parseNode = (node: INode): SVGNode => {
         ...(Object.keys(attributes).length > 0) && {attributes},
         ...(children) && {children}
     };
-}
+};
 
 const parseAttributes = (attributes: Record<string, string>): SVGAttributes => {
     const result: SVGAttributes = {};
@@ -93,6 +90,6 @@ const parseAttributes = (attributes: Record<string, string>): SVGAttributes => {
     })
 
     return result;
-}
+};
 
 const printableElements: string[] = ["title", "desc", "style", "tspan"];

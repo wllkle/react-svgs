@@ -35,8 +35,7 @@ const renderChildNodes = (nodes${ts(": INode[]")})${ts(": ReactNode")} => (
 
 export const ${name} = (props${ts(`: ${name}Props`)}) => {
     const {name, className = undefined, style = undefined} = props;
-    const iconData = data[name] ? data[name] : undefined;
-    const {attributes, children} = iconData || {};
+    const {attributes, children} = data[name] || {};
 
     const svgProps = {
         ...attributes,

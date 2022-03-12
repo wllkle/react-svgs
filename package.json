@@ -1,19 +1,21 @@
 {
-    "name": "react-scripts-svg",
-    "version": "0.1.3",
+    "name": "react-svgs",
+    "version": "0.2.1",
     "description": "Transform a directory of SVG files into an easily usable React component.",
     "main": "./src/index.js",
     "scripts": {
         "build": "tsc",
         "prepublish": "tsc",
-        "test": "npm run build && node src/index.js -p tests/data -o tests/results"
+        "test": "node src/index.js",
+        "test:full": "node src/index.js -p tests/data/svg -o tests/results",
+        "pretest": "npm run build"
     },
     "bin": {
         "react-scripts-svg": "./src/index.js"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/wllkle/react-scripts-svg.git"
+        "url": "git+https://github.com/wllkle/react-svgs.git"
     },
     "author": {
         "name": "Rob Wilkie",
@@ -22,9 +24,9 @@
     },
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/wllkle/react-scripts-svg/issues"
+        "url": "https://github.com/wllkle/react-svgs/issues"
     },
-    "homepage": "https://wilkie.io/projects/react-scripts-svg",
+    "homepage": "https://wilkie.io/projects/react-svgs",
     "dependencies": {
         "cli-color": "^2.0.1",
         "svgo": "^2.8.0",
@@ -43,7 +45,14 @@
     "keywords": [
         "react",
         "svg",
-        "icons"
+        "icons",
+        "script",
+        "devtools"
     ],
-    "private": false
+    "private": false,
+    "svg": {
+        "input": "./tests/data",
+        "output": "./tests/results",
+        "typescript": true
+    }
 }
