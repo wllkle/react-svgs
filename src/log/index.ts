@@ -1,17 +1,18 @@
 import cli from "cli-color";
 
-export const cyan = cli.cyanBright;
 export const yellow = cli.yellowBright;
 export const red = cli.redBright;
 export const blue = cli.blueBright;
+export const green = cli.greenBright;
 
-const app = (color, message?: any): string => `[${color("react-svgs")}] ${typeof message === "string" ? message : "Data\n" + JSON.stringify(message, null, 4)}`;
+export const app = (color): string => `[${color("react-svgs")}]`;
 
+// ${typeof message === "string" ? message : "Data\n" + }
 const log = {
-
-    info: (message?: any) => console.info(app(cyan, message)),
-    warn: (message?: any) => console.warn(app(yellow, message)),
-    error: (message?: any) => console.warn(app(red, message))
+    debug: (object?: object) => console.debug(app(green), "\n", JSON.stringify(object, null, 4)),
+    info: (message?: any) => console.info(app(blue), message),
+    warn: (message?: any) => console.warn(app(yellow), message),
+    error: (message?: any) => console.warn(app(red), message)
 }
 
 export default log;

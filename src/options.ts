@@ -1,20 +1,47 @@
-// import {Options} from "yargs";
-import {Options} from "cosmiconfig";
+import {Options} from "yargs";
 
-export const cosmiconfigOptions: Options = {
-    packageProp: "svg",
-    searchPlaces: [
-        "package.json",
-        "svgrc",
-        "svgrc.json",
-        "svgrc.yaml",
-        "svgrc.yml",
-        "svgrc.js",
-        "svgrc.cjs",
-        "svg.config.js",
-        "svg.config.cjs",
-    ]
+
+const opts: { [key: string]: Options } = {
+    input: {
+        type: "string",
+        alias: "i",
+        description: "Path to directory containing SVG files"
+    },
+    output: {
+        type: "string",
+        alias: "o",
+        description: "Output path (directories will be created)"
+    },
+    name: {
+        type: "string",
+        alias: "n",
+        description: "React component name",
+        default: "SVG"
+    },
+    typescript: {
+        type: "boolean",
+        alias: "t",
+        description: "Output TypeScript files",
+        default: false
+    },
+    absolute: {
+        type: "boolean",
+        description: "Use absolute paths instead of relative.",
+        default: false
+    },
+    "no-jsx": {
+        type: "boolean",
+        description: "Use JSX file extensions (.jsx, .tsx)",
+        default: false
+    },
+    "prop-types": {
+        type: "boolean",
+        description: "Generate PropTypes definition for component",
+        default: false
+    }
 };
+
+export default opts;
 
 export const options: CLIOptions = {
     file: {

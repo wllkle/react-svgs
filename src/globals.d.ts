@@ -5,6 +5,10 @@ declare global {
         [key: string]: Options
     }
 
+    interface UnparsedArgs {
+        [key: string]: any
+    }
+
     interface CLIArgs extends InferredOptionTypes<CLIOptions> {
         file?: string,
         path?: string,

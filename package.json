@@ -1,13 +1,13 @@
 {
     "name": "react-svgs",
-    "version": "0.1.4b3",
+    "version": "0.2.1",
     "description": "Transform a directory of SVG files into an easily usable React component.",
     "main": "./src/index.js",
     "scripts": {
         "build": "tsc",
         "prepublish": "tsc",
-        "test": "node src/entry.js",
-        "tesrt": "node src/entry.js -p tests/data/svg -o tests/results",
+        "test": "node src/index.js",
+        "test:full": "node src/index.js -p tests/data/svg -o tests/results",
         "pretest": "npm run build"
     },
     "bin": {
@@ -26,17 +26,15 @@
     "bugs": {
         "url": "https://github.com/wllkle/react-svgs/issues"
     },
-    "homepage": "https://wilkie.io/projects/react-scripts-svg",
+    "homepage": "https://wilkie.io/projects/react-svgs",
     "dependencies": {
         "cli-color": "^2.0.1",
-        "cosmiconfig": "^7.0.1",
         "svgo": "^2.8.0",
         "svgson": "^5.2.1",
         "yargs": "^17.3.0"
     },
     "devDependencies": {
         "@types/cli-color": "^2.0.1",
-        "@types/cosmiconfig": "^6.0.0",
         "@types/node": "^17.0.0",
         "@types/svgo": "^2.6.2",
         "@types/typescript": "^2.0.0",
@@ -47,7 +45,14 @@
     "keywords": [
         "react",
         "svg",
-        "icons"
+        "icons",
+        "script",
+        "devtools"
     ],
-    "private": false
+    "private": false,
+    "svg": {
+        "input": "./tests/data",
+        "output": "./tests/results",
+        "typescript": true
+    }
 }

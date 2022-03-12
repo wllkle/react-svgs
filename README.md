@@ -1,17 +1,21 @@
-# react-scripts-svg :rocket:
+# react-svgs :rocket:
 
 Transform a directory of SVG files into an easily usable React component.
 
 ## Installation
-
 ```shell
-npm install react-scripts-svg --save-dev
-yarn add -D react-scripts-svg
+npm i -D react-svgs
+yarn add -D react-svgs
 ```
 
 ## Usage
 
-    react-scripts-svg -p src/assets/svg -o src/components -t -d vector
+This tool can be used in two ways; with command line arguments or with a config file object in your `package.json` file.
+
+### Command Line Arguments
+```shell
+react-svgs -p src/assets/svg -o src/components -t -d vector
+```
 
 This will take SVG files from directory `src/assets/svg` and generate files containing the component and SVG data. From
 the working directory where the command is executed; the generated files will be:
@@ -20,16 +24,14 @@ the working directory where the command is executed; the generated files will be
 - `src/components/vector/types.ts` - data, TypeScript types (if `-t` flag is provided)
 
 ### Parameters
-
-| Parameter           | Description                                 | Type    | Default | Required |
-|---------------------|---------------------------------------------|---------|---------|----------|
-| --path, -p          | Path to directory containing SVG files      | string  |         | ✔        |
-| --out, -o           | Output path (directory will be created)     | string  |         | ✔        |
-| --typescript, -t    | Output TypeScript files                     | boolean | false   | ❌        |
-| --component, c      | Generated React component name              | string  | svg     | ❌        |
-| --directory, -d     | Generated directory name                    | string  | SVG     | ❌        |
-| --jsx, -j           | Use JSX file extensions (.jsx, .tsx)        | boolean | true    | ❌        |
-| --propTypes, --pt   | Generate PropTypes definition for component | boolean | false   | ❌        |
+| Parameter            | Description                                 | Type    | Required |
+|----------------------|---------------------------------------------|---------|----------|
+| `--input`, `-i`      | Path to directory containing SVG files      | string  | ✔        |
+| `--out`, `-o`        | Output path (directory will be created)     | string  | ✔        |
+| `--name`, `-n`       | Generated React component name              | string  | ❌        |
+| `--typescript`, `-t` | Output TypeScript files                     | boolean | ❌        |
+| `--no-jsx`           | Use `.js` / `.ts` file extensions           | boolean | ❌        |
+| `--prop-types`       | Generate PropTypes definition for component | boolean | ❌        |
 
 ### Usage in package.json
 
@@ -40,7 +42,7 @@ The script below can be run using `npm run svg`
 
 {
     "scripts": {
-        "svg": "react-scripts-svg -p src/assets/svg -o src/components"
+        "svg": "react-svgs -p src/assets/svg -o src/components"
     }
 }
 ```

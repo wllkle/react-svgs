@@ -47,12 +47,12 @@ export const getStyleObject = (value: string) => {
     return style;
 };
 
-export const buildPathObject = (path: string): PathObject => {
+export const buildPathObject = (path: string, absolute?: boolean): PathObject => {
     path = path.trim();
 
     return {
-        full: join(cwd, path),
-        short: join(shortCwd, path).split(sep).join("/")
+        full: !!absolute ? path : join(cwd, path),
+        short: !!absolute ? path : join(shortCwd, path).split(sep).join("/")
     }
 }
 

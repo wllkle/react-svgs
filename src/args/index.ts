@@ -1,23 +1,22 @@
-import {join} from "path";
-
 import {validateName, validatePath} from "./validators";
 import {logger} from "../logger";
 import {buildPathObject} from "../util";
 
-export const parseArgs = (args: CLIArgs) => new Promise<SVGArgs>((resolve, reject) => {
-    if(args.file) {
+export const parseArgs = (args: UnparsedArgs) => new Promise<SVGArgs>((resolve, reject) => {
 
-    }
+    // TODO: start from here
+    // TODO: fix README
 
-    const {path, out, directory, component} = args;
+    const {input: inputPath, output: outputPath} = args;
+    let {name = ""} = args;
 
-    const name = component.trim();
+    name = name.trim();
     const typescript = args.typescript || true;
     const propTypes = !!args.propTypes;
     const jsx = args.jsx || true;
 
-    const input = buildPathObject(path);
-    const output = buildPathObject(join(out, directory));
+    const input = buildPathObject(inputPath);
+    const output = buildPathObject(outputPath);
 
     const svgArgs: SVGArgs = {input, output, name, typescript, jsx, propTypes};
 
@@ -40,7 +39,7 @@ const validateArgs = (args: SVGArgs) => new Promise((resolve, reject) => {
         return;
     }
 
-    if(!validatePath(args.output)) {
+    if (!validatePath(args.output)) {
         // not an error
         logger.warn(`No path exists at ${logger.colors.blue(args.output.short)}, directories will be created`);
     }
