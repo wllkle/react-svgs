@@ -3,6 +3,7 @@
 Transform a directory of SVG files into an easily usable React component.
 
 ## Installation
+
 ```shell
 npm i -D react-svgs
 yarn add -D react-svgs
@@ -13,6 +14,7 @@ yarn add -D react-svgs
 This tool can be used in two ways; with command line arguments or with a config file object in your `package.json` file.
 
 ### Command Line Arguments
+
 ```shell
 react-svgs -p src/assets/svg -o src/components -t -d vector
 ```
@@ -24,6 +26,7 @@ the working directory where the command is executed; the generated files will be
 - `src/components/vector/types.ts` - data, TypeScript types (if `-t` flag is provided)
 
 ### Parameters
+
 | Parameter            | Description                                 | Type    | Required |
 |----------------------|---------------------------------------------|---------|----------|
 | `--input`, `-i`      | Path to directory containing SVG files      | string  | ✔        |
@@ -70,9 +73,11 @@ export const SettingsIcon = () => (
 | className | string                                                            | ❌        |
 | style     | [CSSProperties](https://reactjs.org/docs/dom-elements.html#style) | ❌        |
 
-_* name prop must be one of the strings exported in `types.js` or `types.ts` - if using TypeScript this will be enforced._
+_* name prop must be one of the strings exported in `types.js` or `types.ts` - if using TypeScript this will be
+enforced._
 
 ## Assumptions
+
 - SVG file names must contain only letters or hyphens, such as:
     - `settings.svg` -> `settings`
     - `alarm-clock.svg` -> `alarmClock`

@@ -1,5 +1,6 @@
 import {optimize, OptimizeOptions} from "svgo";
-import {logger} from "../logger";
+
+import log from "../log";
 
 export const optimizeSVG = (value: SVGFile): void => {
     try {
@@ -10,7 +11,7 @@ export const optimizeSVG = (value: SVGFile): void => {
         }
         return;
     } catch (e) {
-        logger.error(`Error occurred optimizing SVG ${value.name.camel}.`);
+        log.error(`Failed while optimizing SVG ${value.name.camel}.`);
     }
 };
 

@@ -3,12 +3,15 @@
 import yargs from "yargs";
 
 import opts from "./options";
+import validate from "./validation";
 import run from "./app";
+import log from "./log";
 
 yargs(process.argv.slice(2))
+    .pkgConf("svg")
     .options(opts)
     .help(false)
-    .pkgConf("svg")
     .parseAsync()
-    .then(run);
-
+    .then(validate)
+    .then(run)
+    .catch(log.error);

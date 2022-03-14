@@ -1,41 +1,20 @@
-import {InferredOptionTypes, Options} from "yargs";
+export {}
 
 declare global {
-    interface CLIOptions {
-        [key: string]: Options
-    }
+    type SVGAttributes = Record<string, string | object>;
 
-    interface UnparsedArgs {
-        [key: string]: any
-    }
-
-    interface CLIArgs extends InferredOptionTypes<CLIOptions> {
-        file?: string,
-        path?: string,
-        out?: string,
-        typescript?: boolean,
-        name?: string,
-        component?: string,
-        directory?: string,
-        jsx?: boolean,
-        nojsx?: boolean,
-        propTypes?: boolean,
-        absolute?: boolean,
-        // recursive?: boolean
-    }
-
-    interface PathObject {
-        full: string,
-        short: string
-    }
-
-    interface SVGArgs {
+    interface Args {
         input: PathObject,
         output: PathObject,
         name: string,
         typescript: boolean,
         jsx: boolean,
         propTypes: boolean
+    }
+
+    interface PathObject {
+        full: string,
+        short: string
     }
 
     interface SVGName {
@@ -47,8 +26,6 @@ declare global {
         name: SVGName,
         data: string
     }
-
-    type SVGAttributes = Record<string, string | object>
 
     interface SVGNode {
         name: string,

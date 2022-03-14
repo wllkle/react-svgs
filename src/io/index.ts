@@ -2,7 +2,7 @@ import {Dirent, mkdir, readdirSync, readFileSync, writeFile} from "fs";
 import {extname, join} from "path";
 
 import {getNameObj} from "../util";
-import {logger} from "../logger";
+import log, {blue} from "../log";
 
 const getDirName = require("path").dirname
 
@@ -18,7 +18,7 @@ export const listAllSVG = (path: PathObject): SVGFile[] => {
         }
     }).filter(file => !!file);
 
-    logger.info(`Found ${files.length} SVGs in ${logger.colors.blue(path.short)}`);
+    log.info(`Found ${files.length} SVGs in ${blue(path.short)}`);
     return files;
 }
 
@@ -27,17 +27,17 @@ export const saveFile = (path: PathObject, name: string, contents: string) => {
 
     mkdir(getDirName(fullPath), {recursive: true}, (err) => {
         if (err) {
-            logger.error(err.message);
+            log.error(err.message);
             return;
         }
 
         writeFile(fullPath, contents, err => {
             if (err) {
-                logger.error(err.message);
+                log.error(err.message);
                 return;
             }
 
-            logger.info(`Saved file ${logger.colors.blue(path.short + "/" + name)}`);
+            log.info(`Saved file ${blue(path.short + "/" + name)}`);
         })
     })
 }

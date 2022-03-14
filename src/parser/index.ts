@@ -1,8 +1,8 @@
 import {INode, parse as svgson} from "svgson";
 
-import {optimizeSVG} from "../optimize";
+import {optimizeSVG} from "./optimize";
 import {getNameObj, getStyleObject, SVGDataList} from "../util";
-import {logger} from "../logger";
+import log, {blue} from "../log";
 
 export const parseList = (files: SVGFile[]): Promise<SVGList> => {
     const queue: Promise<SVGData>[] = files.map((file: SVGFile) => new Promise<SVGData>((resolve, reject) => {
@@ -19,12 +19,12 @@ export const parseList = (files: SVGFile[]): Promise<SVGList> => {
                 });
 
                 result.filter(res => res.status === "rejected").forEach(item => {
-                    if ("reason" in item) logger.error(item.reason.message);
+                    if ("reason" in item) log.error(item.reason.message);
                 });
             })
             .catch(console.error)
             .finally(() => {
-                logger.info(`Created list of ${Object.keys(svgDataList.list).length} SVGs`);
+                log.info(`Created list with ${blue(Object.keys(svgDataList.list).length)} SVGs`);
                 resolve(svgDataList.list)
             });
     });
