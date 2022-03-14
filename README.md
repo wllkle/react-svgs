@@ -16,14 +16,14 @@ This tool can be used in two ways; with command line arguments or with a config 
 ### Command Line Arguments
 
 ```shell
-react-svgs -p src/assets/svg -o src/components -t -d vector
+react-svgs -i src/assets/svg -o src/components/vector -t
 ```
 
-This will take SVG files from directory `src/assets/svg` and generate files containing the component and SVG data. From
-the working directory where the command is executed; the generated files will be:
+This will take SVG files from directory `src/assets/svg` and generate TypeScript files containing the component and SVG
+data. From the directory where the command is executed; the generated files will be:
 
 - `src/components/vector/index.tsx` - component
-- `src/components/vector/types.ts` - data, TypeScript types (if `-t` flag is provided)
+- `src/components/vector/types.ts` - SVG data, TypeScript types (if `-t` flag is provided)
 
 ### Parameters
 
@@ -38,14 +38,29 @@ the working directory where the command is executed; the generated files will be
 
 ### Usage in package.json
 
-The script below can be run using `npm run svg`
+The scripts below can be run using `npm run svg`, both examples achieve the same result.
 
 ```json5
 // package.json
 
 {
     "scripts": {
-        "svg": "react-svgs -p src/assets/svg -o src/components"
+        "svg": "react-svgs -i src/assets/svg -o src/components/vector -t"
+    }
+}
+```
+
+```json5
+// package.json
+
+{
+    "scripts": {
+        "svg": "react-svgs"
+    },
+    "svg": {
+        "input": "src/assets/svg",
+        "output": "src/components/vector",
+        "typescript": true
     }
 }
 ```
@@ -55,13 +70,17 @@ The script below can be run using `npm run svg`
 This example assumes all default values are used.
 
 ```typescript jsx
-// src/components/settings-icon/index.tsx
+// src/components/settings-icon/index.jsx
 
 import React from "react"
-import Icon from "../icon"
+import SVG from "../svg"
 
 export const SettingsIcon = () => (
-    <Icon name="settings" className="settings-icon" style={{fill: "red"}}/>
+    <SVG
+        name="settings"
+        className="settings-icon"
+        style={{fill: "red"}}
+    />
 );
 ```
 
