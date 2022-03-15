@@ -1,6 +1,6 @@
 # react-svgs :rocket:
 
-Transform a directory of SVG files into an easily usable React component.
+Transform a directory of SVG files into one easily usable React component.
 
 ## Installation
 
@@ -11,7 +11,8 @@ yarn add -D react-svgs
 
 ## Usage
 
-This tool can be used in two ways; with command line arguments or with a config file object in your `package.json` file.
+This tool can be used in two ways; with command line arguments or with a config object (`svg`) in your `package.json`
+file.
 
 ### Command Line Arguments
 
