@@ -4,7 +4,6 @@ import {getTemplatedFile} from "./templates";
 import {buildFileName} from "./util";
 
 export const run = (args: Args): void => {
-    console.log(args)
     const {input, output, name, typescript, jsx, propTypes} = args;
     const fileList: SVGFile[] = listAllSVG(input);
 

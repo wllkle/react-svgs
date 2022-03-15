@@ -6,6 +6,9 @@ import {opts} from "./io";
 import {validate} from "./validation";
 import {run} from "./app";
 import {log} from "./log";
+import {banner} from "./util/constants";
+
+console.log(banner)
 
 yargs(process.argv.slice(2))
     .pkgConf("svg")
