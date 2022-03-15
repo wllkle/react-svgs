@@ -1,6 +1,6 @@
 import {optimize, OptimizeOptions} from "svgo";
 
-import log from "../log";
+import {log} from "../log";
 
 export const optimizeSVG = (value: SVGFile): void => {
     try {

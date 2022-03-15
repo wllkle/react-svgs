@@ -1,7 +1,7 @@
 import {buildPathObject} from "../util";
 import {validateInput, validateName, validateOutput} from "./helpers";
 
-const validate = (argv: any) => new Promise<Args>((resolve, reject) => {
+export const validate = (argv: any) => new Promise<Args>((resolve, reject) => {
     validateName(argv.name, reject);
     validateInput(argv.input, reject);
     validateOutput(argv.output, reject);
@@ -25,5 +25,3 @@ const validate = (argv: any) => new Promise<Args>((resolve, reject) => {
         propTypes
     });
 });
-
-export default validate;

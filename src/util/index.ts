@@ -1,4 +1,4 @@
-import {join, sep, normalize} from "path";
+import {join, normalize, sep} from "path";
 
 export class SVGDataList {
     list: SVGList = {};

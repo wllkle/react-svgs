@@ -1,6 +1,6 @@
 import {Options} from "yargs";
 
-const opts: { [key: string]: Options } = {
+export const opts: { [key: string]: Options } = {
     input: {
         type: "string",
         alias: "i",
@@ -19,23 +19,23 @@ const opts: { [key: string]: Options } = {
     },
     typescript: {
         type: "boolean",
-        alias: "t",
+        alias: ["t", "ts", "typeScript"],
         description: "Output TypeScript files",
         default: false
     },
-    nojsx: {
+    noJsx: {
         type: "boolean",
+        alias: ["nojsx", "no-jsx"],
         description: "Use JSX file extensions (.jsx, .tsx)",
         default: false
     },
-    "prop-types": {
+    propTypes: {
         type: "boolean",
+        alias: ["proptypes", "prop-types"],
         description: "Generate PropTypes definition for component",
         default: false
     }
 };
-
-export default opts;
 
 // TODO: implement recursive (tree of svg directories)
 // recursive: {

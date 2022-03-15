@@ -3,7 +3,7 @@ import {join, sep} from "path";
 
 import {buildPathObject} from "../util";
 import {componentLink} from "../util/constants";
-import log, {blue} from "../log";
+import {blue, log} from "../log";
 
 type RejectFn = (message: string) => void;
 

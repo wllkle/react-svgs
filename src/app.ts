@@ -3,7 +3,8 @@ import {parseList} from "./parser";
 import {getTemplatedFile} from "./templates";
 import {buildFileName} from "./util";
 
-const run = (args: Args): void => {
+export const run = (args: Args): void => {
+    console.log(args)
     const {input, output, name, typescript, jsx, propTypes} = args;
     const fileList: SVGFile[] = listAllSVG(input);
 
@@ -19,5 +20,3 @@ const run = (args: Args): void => {
         saveFile(output, typesFile, types);
     });
 };
-
-export default run;

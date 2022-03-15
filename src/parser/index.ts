@@ -2,7 +2,7 @@ import {INode, parse as svgson} from "svgson";
 
 import {optimizeSVG} from "./optimize";
 import {getNameObj, getStyleObject, SVGDataList} from "../util";
-import log, {blue} from "../log";
+import {blue, log} from "../log";
 
 export const parseList = (files: SVGFile[]): Promise<SVGList> => {
     const queue: Promise<SVGData>[] = files.map((file: SVGFile) => new Promise<SVGData>((resolve, reject) => {

@@ -2,7 +2,7 @@ import {Dirent, mkdir, readdirSync, readFileSync, writeFile} from "fs";
 import {extname, join} from "path";
 
 import {getNameObj} from "../util";
-import log, {blue} from "../log";
+import {blue, log} from "../log";
 
 const getDirName = require("path").dirname
 
@@ -41,3 +41,5 @@ export const saveFile = (path: PathObject, name: string, contents: string) => {
         })
     })
 }
+
+export {opts} from "./options";

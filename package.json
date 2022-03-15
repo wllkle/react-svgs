@@ -1,6 +1,6 @@
 {
     "name": "react-svgs",
-    "version": "0.2.6",
+    "version": "0.2.7",
     "description": "Transform a directory of SVG files into an easily usable React component.",
     "scripts": {
         "build": "tsc",
@@ -48,10 +48,5 @@
         "script",
         "devtools"
     ],
-    "private": false,
-    "svged": {
-        "input": "./tests/data",
-        "output": "./tests/results",
-        "typescript": true
-    }
+    "private": false
 }

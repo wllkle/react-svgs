@@ -34,7 +34,7 @@ data. From the directory where the command is executed; the generated files will
 | `--name`, `-n`       | Generated React component name              | string  | ❌        |
 | `--typescript`, `-t` | Output TypeScript files                     | boolean | ❌        |
 | `--nojsx`            | Use `.js` / `.ts` file extensions           | boolean | ❌        |
-| `--prop-types`       | Generate PropTypes definition for component | boolean | ❌        |
+| `--proptypes`        | Generate PropTypes definition for component | boolean | ❌        |
 
 ### Usage in package.json
 

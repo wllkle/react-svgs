@@ -4,8 +4,7 @@
         "target": "es5",
         "sourceMap": true,
         "esModuleInterop": true,
-        "isolatedModules": false,
-        "jsx": "react"
+        "isolatedModules": false
     },
     "exclude": [
         "node_modules",
