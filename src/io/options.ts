@@ -23,7 +23,7 @@ const opts: { [key: string]: Options } = {
         description: "Output TypeScript files",
         default: false
     },
-    "no-jsx": {
+    nojsx: {
         type: "boolean",
         description: "Use JSX file extensions (.jsx, .tsx)",
         default: false

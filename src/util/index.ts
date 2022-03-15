@@ -1,10 +1,9 @@
-import {join, sep} from "path";
+import {join, sep, normalize} from "path";
 
 export class SVGDataList {
     list: SVGList = {};
 
     append = (data: SVGData) => {
-        if (!data) console.log(data)
         const {camel, hyphen} = data.name;
         const {attributes, children} = data.element;
         const item = {
@@ -48,7 +47,7 @@ export const getStyleObject = (value: string) => {
 };
 
 export const buildPathObject = (path: string): PathObject => {
-    path = path.trim();
+    path = normalize(path.trim());
 
     return {
         full: join(cwd, path),

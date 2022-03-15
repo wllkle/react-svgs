@@ -45,15 +45,15 @@ export const ${name} = (props${ts(`: ${name}Props`)}) => {
     };
 
     return (<svg {...svgProps}/>);
-}${propTypes ? `\n\n${name}${getPropTypes}` : ""}
+}${propTypes ? getPropTypes(name) : ""}
 
 export default ${name};
 export {${name}TypesArray} from "./types";${ts(`\nexport type {${name}Types};`)}
 `;
 }
 
-const getPropTypes: string = `.propTypes = {
-    name: PropTypes.oneOf(IconTypesArray),
+const getPropTypes = (name: string): string => `\n\n${name}.propTypes = {
+    name: PropTypes.oneOf(${name}TypesArray),
     className: PropTypes.string,
     style: PropTypes.object
 }`

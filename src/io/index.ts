@@ -37,7 +37,7 @@ export const saveFile = (path: PathObject, name: string, contents: string) => {
                 return;
             }
 
-            log.info(`Saved file ${blue(path.short + "/" + name)}`);
+            log.info(`Saved file ${blue(name)}`);
         })
     })
 }

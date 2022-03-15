@@ -2,6 +2,7 @@ import {existsSync, lstatSync} from "fs";
 import {join, sep} from "path";
 
 import {buildPathObject} from "../util";
+import {componentLink} from "../util/constants";
 import log, {blue} from "../log";
 
 type RejectFn = (message: string) => void;
@@ -12,8 +13,8 @@ export const validateName = (value: any, reject: RejectFn) => {
     const nameString = value.toString();
 
     if (nameString.length === 0) reject("Component name cannot be empty");
-    if (!alphaOnly.test(nameString)) reject("Component name must only contain alphabetic characters");
-    if (nameString[0] === nameString.toLowerCase()) reject("Component name must begin with a capital letter");
+    if (!alphaOnly.test(nameString)) reject("Component name must only contain alphabetic characters, no spaces");
+    if (nameString[0] === nameString[0].toLowerCase()) reject("Component name must begin with a capital letter, see " + componentLink);
 };
 
 export const validateInput = (value: any, reject: RejectFn) => {

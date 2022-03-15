@@ -12,7 +12,7 @@ const validate = (argv: any) => new Promise<Args>((resolve, reject) => {
     const {
         name,
         typescript = false,
-        nojsx = false,
+        nojsx,
         propTypes = false
     } = argv;
 
@@ -21,7 +21,7 @@ const validate = (argv: any) => new Promise<Args>((resolve, reject) => {
         output,
         name,
         typescript,
-        jsx: !nojsx,
+        jsx: nojsx !== true,
         propTypes
     });
 });

@@ -2,7 +2,7 @@
 
 import yargs from "yargs";
 
-import opts from "./options";
+import opts from "./io/options";
 import validate from "./validation";
 import run from "./app";
 import log from "./log";

@@ -33,7 +33,7 @@ data. From the directory where the command is executed; the generated files will
 | `--out`, `-o`        | Output path (directory will be created)     | string  | ✔        |
 | `--name`, `-n`       | Generated React component name              | string  | ❌        |
 | `--typescript`, `-t` | Output TypeScript files                     | boolean | ❌        |
-| `--no-jsx`           | Use `.js` / `.ts` file extensions           | boolean | ❌        |
+| `--nojsx`            | Use `.js` / `.ts` file extensions           | boolean | ❌        |
 | `--prop-types`       | Generate PropTypes definition for component | boolean | ❌        |
 
 ### Usage in package.json
@@ -45,7 +45,7 @@ The scripts below can be run using `npm run svg`, both examples achieve the same
 
 {
     "scripts": {
-        "svg": "react-svgs -i src/assets/svg -o src/components/vector -t"
+        "svg": "react-svgs -i src/assets/svg -o src/components/vector -n Vector -t"
     }
 }
 ```
@@ -60,6 +60,7 @@ The scripts below can be run using `npm run svg`, both examples achieve the same
     "svg": {
         "input": "src/assets/svg",
         "output": "src/components/vector",
+        "name": "Vector",
         "typescript": true
     }
 }
