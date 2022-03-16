@@ -107,7 +107,7 @@ project structure is as follows:
 ├── <span style="color: dodgerblue">assets</span>
 │   ├── alarm-clock.svg
 │   └── settings.svg
-└── <span style="color: dodgerblue">components</span>
+├── <span style="color: dodgerblue">components</span>
 │   └── <span style="color: dodgerblue">icon</span>
 │       └── index.tsx
 └── package.json
