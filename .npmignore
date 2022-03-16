@@ -1,4 +1,5 @@
 /tests
+/src
 *.ts
 *.tsx
 *.js.map
@@ -8,3 +9,7 @@ yarn.lock
 package-lock.json
 tsconfig.json
 .npmrc
+.eslintrc
+webpack.config.js
+.editorconfig
+.gitignore
