@@ -109,7 +109,7 @@ src
 │   └── settings.svg
 └── components
 │   └── icon
-│       └── index.jsx
+│       └── index.tsx
 └── package.json
 ```
 
@@ -122,7 +122,8 @@ src
     },
     "svg": {
         "input": "src/assets",
-        "output": "src/components/icon/svg"
+        "output": "src/components/icon/svg",
+        "typescript": true
     }
 }
 ```
@@ -145,14 +146,14 @@ src
 ├── components
 │   └── icon
 │       ├── svg
-│       │   ├── index.jsx
-│       │   └── types.js
-│       └── index.jsx
+│       │   ├── index.tsx
+│       │   └── types.ts
+│       └── index.tsx
 └── package.json
 ```
 
 ```typescript jsx
-// src/components/icon/index.jsx
+// src/components/icon/index.tsx
 
 import React from "react";
 import SVG, {SVGTypes} from "./svg";
