@@ -145,10 +145,10 @@ src
 │   └── settings.svg
 ├── components
 │   └── icon
-│       ├── svg
-│       │   ├── index.tsx
-│       │   └── types.ts
-│       └── index.tsx
+│       ├── index.tsx
+│       └── svg
+│           ├── index.tsx
+│           └── types.ts
 └── package.json
 ```
 
