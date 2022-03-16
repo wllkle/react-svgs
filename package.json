@@ -14,20 +14,19 @@
     "bin": {
         "react-svgs": "dist/svgs.js"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/wllkle/react-svgs.git"
-    },
     "author": {
         "name": "Rob Wilkie",
         "email": "hello@wilkie.io",
         "url": "https://wilkie.io"
     },
-    "license": "MIT",
+    "homepage": "https://wilkie.io/projects/react-svgs",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wllkle/react-svgs.git"
+    },
     "bugs": {
         "url": "https://github.com/wllkle/react-svgs/issues"
     },
-    "homepage": "https://wilkie.io/projects/react-svgs",
     "dependencies": {
         "cli-color": "^2.0.1",
         "svgo": "^2.8.0",
@@ -57,5 +56,6 @@
         "script",
         "devtools"
     ],
+    "license": "MIT",
     "private": false
 }
