@@ -1,16 +1,20 @@
 # build files
+dist
 *.js
 *.js.map
 *.map
+
+# config files
+!*.config.js
 
 # node modules
 /node_modules
 
 # IDE files
 .idea
-.npmrc
 .vscode
 .vs
+.npmrc
 
 # logs
 *.log

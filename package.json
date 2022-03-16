@@ -1,16 +1,18 @@
 {
     "name": "react-svgs",
-    "version": "0.2.11",
+    "version": "0.2.12",
     "description": "Transform a directory of SVG files into an easily usable React component.",
     "scripts": {
-        "build": "tsc",
-        "test": "node src/index.js",
-        "prepublish": "npm run build",
-        "pretest": "npm run build"
+        "build": "run-s clean webpack",
+        "test": "node dist/svgs.js",
+        "prepublish": "run-s build",
+        "pretest": "run-s build",
+        "clean": "rimraf dist",
+        "webpack": "webpack"
     },
-    "main": "./src/index.js",
+    "main": "./dist/svgs.js",
     "bin": {
-        "react-svgs": "./src/index.js"
+        "react-svgs": "./dist/svgs.js"
     },
     "repository": {
         "type": "git",
@@ -39,7 +41,13 @@
         "@types/typescript": "^2.0.0",
         "@types/yargs": "^17.0.7",
         "eslint": "^8.10.0",
-        "typescript": "^4.5.4"
+        "npm-run-all": "^4.1.5",
+        "rimraf": "^3.0.2",
+        "ts-loader": "^9.2.8",
+        "typescript": "^4.5.4",
+        "webpack": "^5.70.0",
+        "webpack-cli": "^4.9.2",
+        "webpack-node-externals": "^3.0.0"
     },
     "keywords": [
         "react",
