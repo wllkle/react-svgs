@@ -1,6 +1,6 @@
 {
     "name": "react-svgs",
-    "version": "0.2.19",
+    "version": "0.2.20",
     "description": "Transform a directory of SVG files into an easily usable React component.",
     "scripts": {
         "build": "npm-run-all clean webpack",

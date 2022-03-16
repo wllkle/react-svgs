@@ -102,16 +102,16 @@ export const SettingsIcon = () => (
 This example demonstrates using a "wrapper" component around the generated component. This example assumes the existing
 project structure is as follows:
 
-```
-src
-├── assets
+<pre>
+<span style="color: dodgerblue">src</span>
+├── <span style="color: dodgerblue">assets</span>
 │   ├── alarm-clock.svg
 │   └── settings.svg
-└── components
-│   └── icon
+└── <span style="color: dodgerblue">components</span>
+│   └── <span style="color: dodgerblue">icon</span>
 │       └── index.tsx
 └── package.json
-```
+</pre>
 
 ```json5
 // package.json
@@ -138,19 +138,19 @@ react-svgs
 
 After running the script the project should look like this:
 
-```
-src
-├── assets
+<pre>
+<span style="color: dodgerblue">src</span>
+├── <span style="color: dodgerblue">assets</span>
 │   ├── alarm-clock.svg
 │   └── settings.svg
-├── components
-│   └── icon
+├── <span style="color: dodgerblue">components</span>
+│   └── <span style="color: dodgerblue">icon</span>
 │       ├── index.tsx
-│       └── svg
-│           ├── index.tsx
-│           └── types.ts
+│       └── <span style="color: dodgerblue">svg</span>
+│           ├── <span style="color: limegreen">index.tsx</span>
+│           └── <span style="color: limegreen">types.ts</span>
 └── package.json
-```
+</pre>
 
 ```typescript jsx
 // src/components/icon/index.tsx
