@@ -17,7 +17,6 @@ describe("util tests", () => {
             }
         ];
 
-
         names.forEach(name => {
             const nameObj = getNameObj(name.input);
             expect(nameObj.camel).toBe(name.expect);

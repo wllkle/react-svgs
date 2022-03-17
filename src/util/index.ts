@@ -31,8 +31,6 @@ export const getNameObj = (str: string): SVGName => {
     const hyphen = words.join("-").trim();
     const camel = words.shift() + words.map(capitaliseFirst).join("").trim();
 
-    console.log({camel, hyphen});
-
     return {camel, hyphen};
 };
 
