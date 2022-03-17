@@ -22,7 +22,6 @@ export const capitaliseFirst = (str: string) => {
 };
 
 export const getNameObj = (str: string): SVGName => {
-    console.log("getNameObj", str);
     const dot = ".svg";
     if (str.endsWith(dot)) str = str.substring(0, str.length - dot.length);
 

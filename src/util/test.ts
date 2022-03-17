@@ -10,13 +10,16 @@ describe("util tests", () => {
             {
                 input: "test-name",
                 expect: "testName"
+            },
+            {
+                input: "test-name.svg",
+                expect: "testName"
             }
         ];
 
 
         names.forEach(name => {
             const nameObj = getNameObj(name.input);
-            console.log(nameObj);
             expect(nameObj.camel).toBe(name.expect);
         });
     });
