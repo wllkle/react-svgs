@@ -1,6 +1,6 @@
-const path = require("path")
-const nodeExternals = require("webpack-node-externals")
-const Shebang = require("webpack-shebang-plugin")
+const path = require("path");
+const nodeExternals = require("webpack-node-externals");
+const Shebang = require("webpack-shebang-plugin");
 
 module.exports = {
     mode: "production",
@@ -24,7 +24,7 @@ module.exports = {
             }
         ]
     }
-}
+};
 
 // (28,672 bytes)
 // (27,043 bytes)
