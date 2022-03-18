@@ -14,7 +14,7 @@ ${ts("// @ts-nocheck")}
 
 import React${ts(", {ReactNode, CSSProperties}")} from "react";${propTypes ? `\nimport PropTypes from "prop-types";` : ""}
 import {data${propTypes ? `, ${name}TypesArray` : ""}${ts(`, ${name}Types, INode`)}} from "./types";${ts(`\n\ninterface ${name}Props {
-    name: ${name}Types,
+    name?: ${name}Types,
     className?: string,
     style?: CSSProperties
 }`)}
@@ -38,7 +38,7 @@ export const ${name} = (props${ts(`: ${name}Props`)}) => {
     const {attributes, children} = data[name] || {};
 
     const svgProps = {
-        ...attributes,
+        ...(attributes) && {attributes},
         ...(className) && {className},
         ...(style) && {style},
         ...(children) && {children: renderChildNodes(children)}
