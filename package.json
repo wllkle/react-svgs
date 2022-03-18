@@ -1,11 +1,11 @@
 {
     "name": "react-svgs",
-    "version": "0.2.22",
+    "version": "0.2.23",
     "description": "Transform a directory of SVG files into an easily usable React component.",
     "scripts": {
         "build": "npm-run-all clean webpack",
         "test": "jest",
-        "test:cli": "run-s build node dist/svgs.js",
+        "test:cli": "node dist/svgs.js",
         "prepublish": "run-s build",
         "clean": "rimraf dist",
         "webpack": "webpack"

@@ -7,7 +7,7 @@ export class SVGDataList {
         const {camel, hyphen} = data.name;
         const {attributes, children} = data.element;
         const item = {
-            [camel]: {
+            [`${camel}`]: {
                 name: hyphen,
                 attributes,
                 children
@@ -21,9 +21,8 @@ export const capitaliseFirst = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-export const getNameObj = (str: string): SVGName => {
-    const dot = ".svg";
-    if (str.endsWith(dot)) str = str.substring(0, str.length - dot.length);
+export const getNameObj = (str: string, removeExtension: boolean = false): SVGName => {
+    if (removeExtension) str = str.replace(".svg", "");
 
     str = str.toLowerCase();
     const words = str.split(/\W/g);
