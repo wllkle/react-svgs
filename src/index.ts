@@ -8,7 +8,7 @@ import {run} from "./app";
 import {log} from "./log";
 import {banner} from "./util/constants";
 
-console.log(banner)
+console.log(banner);
 
 yargs(process.argv.slice(2))
     .pkgConf("svg")

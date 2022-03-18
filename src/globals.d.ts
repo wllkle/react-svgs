@@ -1,4 +1,4 @@
-export {}
+export {};
 
 declare global {
     type SVGAttributes = Record<string, string | object>;
@@ -45,6 +45,6 @@ declare global {
             name: string,
             attributes?: SVGAttributes,
             children: SVGNode[]
-        }
+        };
     }
 }

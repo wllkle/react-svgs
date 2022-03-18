@@ -50,10 +50,10 @@ export const ${name} = (props${ts(`: ${name}Props`)}) => {
 export default ${name};
 export {${name}TypesArray} from "./types";${ts(`\nexport type {${name}Types};`)}
 `;
-}
+};
 
 const getPropTypes = (name: string): string => `\n\n${name}.propTypes = {
     name: PropTypes.oneOf(${name}TypesArray),
     className: PropTypes.string,
     style: PropTypes.object
-}`
+}`;

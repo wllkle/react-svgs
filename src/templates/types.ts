@@ -6,7 +6,7 @@ export const typesTemplate = (content: SVGList, name: string, typescript: boolea
     const iconTypesArray = iconTypes.join(",\n\t");
 
     if (typescript) {
-        const iconTypesUnion = iconTypes.join(" |\n\t")
+        const iconTypesUnion = iconTypes.join(" |\n\t");
 
         return `${WARNING_COMMENT}
 
@@ -46,7 +46,7 @@ export const ${name}TypesArray = [
     ${iconTypesArray}
 ];
 `;
-}
+};
 
 const clean = (obj: SVGList): string => {
     const cleaned = JSON.stringify(obj, null, 4);

@@ -1,7 +1,7 @@
 import {Dirent, mkdir, readdirSync, readFileSync, writeFile} from "fs";
 import {join, parse} from "path";
 
-import {getNameObj} from "../util";
+import {buildNameObj} from "../util";
 import {blue, log} from "../log";
 
 const getDirName = require("path").dirname;
@@ -14,7 +14,7 @@ export const listAllSVG = (path: PathObject): SVGFile[] => {
             const {name, ext} = parse(file.name);
             if (ext === ".svg") {
                 return {
-                    name: getNameObj(name),
+                    name: buildNameObj(name),
                     data: readFileSync(join(path.full, file.name)).toString()
                 };
             }

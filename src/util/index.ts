@@ -21,9 +21,8 @@ export const capitaliseFirst = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-export const getNameObj = (str: string): SVGName => {
-    const clean = str.toLowerCase().replace(".svg", "");
-    const words = clean.split(/\W/g);
+export const buildNameObj = (str: string): SVGName => {
+    const words = str.toLowerCase().split(/\W/g);
     const hyphen = words.join("-").trim();
     const camel = words.shift() + words.map(capitaliseFirst).join("").trim();
 
@@ -37,7 +36,7 @@ export const getStyleObject = (value: string) => {
         const [property, value] = el.split(":");
         if (!property) return;
 
-        const prop = getNameObj(property.trim()).camel;
+        const prop = buildNameObj(property.trim()).camel;
         style[prop] = value.trim();
     });
 

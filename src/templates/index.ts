@@ -27,4 +27,4 @@ export const getTemplatedFile = (file: FileType, options: TemplateOptions): stri
     }
 
     return data;
-}
+};

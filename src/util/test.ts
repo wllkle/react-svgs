@@ -1,4 +1,4 @@
-import {getNameObj} from "./index";
+import {buildNameObj} from "./";
 
 describe("util tests", () => {
     test("getNameObj", () => {
@@ -10,15 +10,11 @@ describe("util tests", () => {
             {
                 input: "test-name",
                 expect: "testName"
-            },
-            {
-                input: "test-name.svg",
-                expect: "testName"
             }
         ];
 
         names.forEach(n => {
-            const nameObj = getNameObj(n.input);
+            const nameObj = buildNameObj(n.input);
             expect(nameObj.camel).toBe(n.expect);
         });
     });

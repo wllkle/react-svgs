@@ -4,6 +4,7 @@ const Shebang = require("webpack-shebang-plugin");
 
 module.exports = {
     mode: "production",
+    cache: false,
     target: "node",
     entry: "./src/index.ts",
     externals: [nodeExternals()],
@@ -11,21 +12,21 @@ module.exports = {
     optimization: {
         minimize: true
     },
+    resolve: {
+        extensions: [".ts"]
+    },
     module: {
+
         rules: [
             {
                 test: /\.ts$/,
                 use: "ts-loader",
-                // exclude: /node_modules/
+                exclude: /node_modules/
             }
         ]
     },
     output: {
         path: path.join(__dirname, "dist"),
         filename: "svgs.js"
-    },
-    cache: false
+    }
 };
-
-// (28,672 bytes)
-// (27,043 bytes)

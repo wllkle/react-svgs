@@ -1,7 +1,7 @@
 import {INode, parse as svgson} from "svgson";
 
 import {optimizeSVG} from "./optimize";
-import {getNameObj, getStyleObject, SVGDataList} from "../util";
+import {buildNameObj, getStyleObject, SVGDataList} from "../util";
 import {blue, log} from "../log";
 
 export const parseList = (files: SVGFile[]): Promise<SVGList> => {
@@ -25,7 +25,7 @@ export const parseList = (files: SVGFile[]): Promise<SVGList> => {
             .catch(console.error)
             .finally(() => {
                 log.info(`Created list with ${blue(Object.keys(svgDataList.list).length)} SVGs`);
-                resolve(svgDataList.list)
+                resolve(svgDataList.list);
             });
     });
 };
@@ -76,7 +76,7 @@ const parseAttributes = (attributes: Record<string, string>): SVGAttributes => {
         // fixes hyphenated attributes such as "data-name"
         if (attr.includes("-")) {
             const val = attributes[attr];
-            const nameObj = getNameObj(attr);
+            const nameObj = buildNameObj(attr);
             result[nameObj.camel] = val;
         } else if (attr === "class") {
             const val = attributes[attr];
@@ -87,7 +87,7 @@ const parseAttributes = (attributes: Record<string, string>): SVGAttributes => {
         } else {
             result[attr] = attributes[attr];
         }
-    })
+    });
 
     return result;
 };

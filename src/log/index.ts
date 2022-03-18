@@ -13,4 +13,4 @@ export const log = {
     info: (message?: any) => console.info(app(blue), message),
     warn: (message?: any) => console.warn(app(yellow), message),
     error: (message?: any) => console.warn(app(red), "Error:", message)
-}
+};
