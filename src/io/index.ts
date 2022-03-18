@@ -1,26 +1,29 @@
 import {Dirent, mkdir, readdirSync, readFileSync, writeFile} from "fs";
-import {extname, join} from "path";
+import {join, parse} from "path";
 
 import {getNameObj} from "../util";
 import {blue, log} from "../log";
 
-const getDirName = require("path").dirname
+const getDirName = require("path").dirname;
 
 export const listAllSVG = (path: PathObject): SVGFile[] => {
     const files: SVGFile[] = readdirSync(path.full, {
         withFileTypes: true
     }).map((file: Dirent) => {
-        if (file.isFile() && extname(file.name) === ".svg") {
-            return {
-                name: getNameObj(file.name),
-                data: readFileSync(join(path.full, file.name)).toString()
-            };
+        if (file.isFile()) {
+            const {name, ext} = parse(file.name);
+            if (ext === ".svg") {
+                return {
+                    name: getNameObj(name),
+                    data: readFileSync(join(path.full, file.name)).toString()
+                };
+            }
         }
     }).filter(file => !!file);
 
     log.info(`Found ${files.length} SVGs in ${blue(path.short)}`);
     return files;
-}
+};
 
 export const saveFile = (path: PathObject, name: string, contents: string) => {
     const fullPath = join(path.full, name);
@@ -38,8 +41,8 @@ export const saveFile = (path: PathObject, name: string, contents: string) => {
             }
 
             log.info(`Saved file ${blue(name)}`);
-        })
-    })
-}
+        });
+    });
+};
 
 export {opts} from "./options";

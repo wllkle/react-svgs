@@ -17,9 +17,9 @@ describe("util tests", () => {
             }
         ];
 
-        names.forEach(name => {
-            const nameObj = getNameObj(name.input);
-            expect(nameObj.camel).toBe(name.expect);
+        names.forEach(n => {
+            const nameObj = getNameObj(n.input);
+            expect(nameObj.camel).toBe(n.expect);
         });
     });
 });

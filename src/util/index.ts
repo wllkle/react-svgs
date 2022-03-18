@@ -21,12 +21,9 @@ export const capitaliseFirst = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-export const getNameObj = (str: string, removeExtension: boolean = false): SVGName => {
-    if (removeExtension) str = str.replace(".svg", "");
-
-    str = str.toLowerCase();
-    const words = str.split(/\W/g);
-
+export const getNameObj = (str: string): SVGName => {
+    const clean = str.toLowerCase().replace(".svg", "");
+    const words = clean.split(/\W/g);
     const hyphen = words.join("-").trim();
     const camel = words.shift() + words.map(capitaliseFirst).join("").trim();
 

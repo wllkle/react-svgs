@@ -23,7 +23,8 @@ module.exports = {
     output: {
         path: path.join(__dirname, "dist"),
         filename: "svgs.js"
-    }
+    },
+    cache: false
 };
 
 // (28,672 bytes)
