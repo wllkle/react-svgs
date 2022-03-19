@@ -104,19 +104,7 @@ export const SettingsIcon = () => (
 
 #### Complete Example
 
-This example demonstrates using a "wrapper" component around the generated component. This example assumes the existing
-project structure is as follows:
-
-<pre>
-<span style="color: dodgerblue">src</span>
-├── <span style="color: dodgerblue">assets</span>
-│   ├── alarm-clock.svg
-│   └── settings.svg
-├── <span style="color: dodgerblue">components</span>
-│   └── <span style="color: dodgerblue">icon</span>
-│       └── index.tsx
-└── package.json
-</pre>
+This example demonstrates using a "wrapper" component around the generated component.
 
 ```json5
 // package.json
@@ -133,7 +121,7 @@ project structure is as follows:
 }
 ```
 
-To run the script use one of the following commands:
+Run the script using one of the following commands:
 
 ```shell
 npm run icons
@@ -141,21 +129,24 @@ yarn icons
 react-svgs
 ```
 
-After running the script the project should look like this:
+```json5
+// project structure
 
-<pre>
-<span style="color: dodgerblue">src</span>
-├── <span style="color: dodgerblue">assets</span>
-│   ├── alarm-clock.svg
-│   └── settings.svg
-├── <span style="color: dodgerblue">components</span>
-│   └── <span style="color: dodgerblue">icon</span>
-│       ├── index.tsx
-│       └── <span style="color: dodgerblue">svg</span>
-│           ├── <span style="color: limegreen">index.tsx</span>
-│           └── <span style="color: limegreen">types.ts</span>
-└── package.json
-</pre>
+before                            after
+------                            -----
+
+src                               src
+├── assets                        ├── assets
+│   ├── alarm-clock.svg           │   ├── alarm-clock.svg
+│   └── settings.svg              │   └── settings.svg
+├── components                    ├── components
+│   └── icon                      │   └── icon
+│       └── index.tsx             │       ├── index.tsx
+└── package.json                  │       └── svg
+                                  │           ├── index.tsx
+                                  │           └── types.ts
+                                  └── package.json
+```
 
 ```typescript jsx
 // src/components/icon/index.tsx
