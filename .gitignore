@@ -1,12 +1,20 @@
+# build files
+dist
 *.js
 *.js.map
 *.map
 
+# config files
+!*.config.js
+
 # node modules
 /node_modules
 
-# JetBrains files
+# IDE files
 .idea
+.vscode
+.vs
+.npmrc
 
 # logs
 *.log
@@ -14,4 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log
 
-tests/results
+tests/
+!tests/data
+!tests/coverage
+coverage/
