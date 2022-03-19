@@ -4,7 +4,7 @@
     "description": "Transform a directory of SVG files into an easily usable React component.",
     "scripts": {
         "build": "npm-run-all clean webpack",
-        "test": "jest --coverage",
+        "test": "jest --coverage --silent=false",
         "test:cli": "node dist/svgs.js -i tests/data -o tests/result -t",
         "prepublish": "run-s build",
         "clean": "rimraf dist",

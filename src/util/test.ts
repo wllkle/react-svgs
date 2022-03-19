@@ -44,7 +44,9 @@ describe("util tests", () => {
 
     test("buildFileName", () => {
         const tests = [
+            {name: "icon", ts: false, expect: "icon.js"},
             {name: "icon", ts: false, jsx: false, expect: "icon.js"},
+            {name: "icon", ts: true, expect: "icon.ts"},
             {name: "icon", ts: true, jsx: false, expect: "icon.ts"},
             {name: "icon", ts: false, jsx: true, expect: "icon.jsx"},
             {name: "icon", ts: true, jsx: true, expect: "icon.tsx"}
@@ -57,31 +59,41 @@ describe("util tests", () => {
     });
 
     test("appendToListObject", () => {
-        let list: SVGList = {};
-        const svg1: SVGData = {
-            name: {
-                camel: "svgOne",
-                hyphen: "svg-one"
+        const svgData: SVGData[] = [
+            {
+                name: {
+                    camel: "svgOne",
+                    hyphen: "svg-one"
+                },
+                element: {
+                    name: "title",
+                    type: "print",
+                    value: "svg-one"
+                }
             },
-            element: {
-                name: "title",
-                type: "print",
-                value: "svg-one"
+            {
+                name: {
+                    camel: "svgTwo",
+                    hyphen: "svg-two"
+                },
+                element: {
+                    name: "title",
+                    type: "print",
+                    value: "svg-two"
+                }
             }
-        };
-        const svg2: SVGData = {
-            name: {
-                camel: "svgTwo",
-                hyphen: "svg-two"
-            },
-            element: {
-                name: "title",
-                type: "print",
-                value: "svg-two"
-            }
-        };
+        ];
 
-        list = appendToListObject(svg1, list);
-        expect(list.)
+        let list: SVGList = {};
+        svgData.forEach((data: SVGData, index: number) => {
+            list = appendToListObject(data, list);
+            expect(Object.keys(list).length).toBe(index + 1);
+
+            for (let i = 0; i <= index; i++) {
+                const {camel, hyphen: name} = svgData[i].name;
+                const {attributes, children} = svgData[i].element;
+                expect(list[camel]).toEqual({name, attributes, children});
+            }
+        });
     });
 });
