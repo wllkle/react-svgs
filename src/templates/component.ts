@@ -1,4 +1,4 @@
-import {WARNING_COMMENT} from "../util";
+import {WARNING_COMMENT} from "../constants";
 
 export const componentTemplate = (
     content: SVGList,
@@ -9,9 +9,7 @@ export const componentTemplate = (
     const ts = (value: string) => typescript ? value : "";
 
     return `${WARNING_COMMENT}
-
-${ts("// @ts-nocheck")}
-
+${ts("\n// @ts-nocheck\n")}
 import React${ts(", {ReactNode, CSSProperties}")} from "react";${propTypes ? `\nimport PropTypes from "prop-types";` : ""}
 import {data${propTypes ? `, ${name}TypesArray` : ""}${ts(`, ${name}Types, INode`)}} from "./types";${ts(`\n\ninterface ${name}Props {
     name?: ${name}Types,
@@ -19,22 +17,8 @@ import {data${propTypes ? `, ${name}TypesArray` : ""}${ts(`, ${name}Types, INode
     style?: CSSProperties
 }`)}
 
-const renderChildNodes = (nodes${ts(": INode[]")})${ts(": ReactNode")} => (
-    <>
-        {nodes.map((node${ts(": INode")}) => {
-            const {name, attributes = {}, type, value, children = []} = node;
-            const Tag = name.toString();
-            const id = Math.random().toString(36);
-
-            if (type === "print") return (<Tag key={id}>{value}</Tag>);
-
-            return (<Tag key={id} {...attributes}>{renderChildNodes(children)}</Tag>);
-        })}
-    </>
-);
-
 export const ${name} = (props${ts(`: ${name}Props`)}) => {
-    const {name, className = undefined, style = undefined} = props;
+    const {name, className, style} = props;
     const {attributes, children} = data[name] || {};
 
     const svgProps = {
@@ -45,7 +29,20 @@ export const ${name} = (props${ts(`: ${name}Props`)}) => {
     };
 
     return (<svg {...svgProps}/>);
-}${propTypes ? getPropTypes(name) : ""}
+};${propTypes ? getPropTypes(name) : ""}
+
+const renderChildNodes = (nodes${ts(": INode[]")})${ts(": ReactNode")} => (
+    <>
+        {nodes.map((node${ts(": INode")}, index${ts(": number")}) => {
+            const {name, attributes = {}, type, value, children = []} = node;
+            const Tag = name.toString();
+
+            if (type === "print") return (<Tag key={index}>{value}</Tag>);
+
+            return (<Tag key={index} {...attributes}>{renderChildNodes(children)}</Tag>);
+        })}
+    </>
+);
 
 export default ${name};
 export {${name}TypesArray} from "./types";${ts(`\nexport type {${name}Types};`)}
@@ -56,4 +53,4 @@ const getPropTypes = (name: string): string => `\n\n${name}.propTypes = {
     name: PropTypes.oneOf(${name}TypesArray),
     className: PropTypes.string,
     style: PropTypes.object
-}`;
+};`;

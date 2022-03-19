@@ -2,6 +2,11 @@
 
 Transform a directory of SVG files into one easily usable React component.
 
+![](https://img.shields.io/github/package-json/v/wllkle/react-svgs/v1?label=version)
+![](https://img.shields.io/npm/dm/react-svgs)
+![](https://img.shields.io/badge/Coverage-86%25-83A603.svg?prefix=$coverage$&label=coverage)
+![](https://img.shields.io/github/issues/wllkle/react-svgs)
+
 ## Installation
 
 ```shell

@@ -1,7 +1,7 @@
 import {Dirent, mkdir, readdirSync, readFileSync, writeFile} from "fs";
 import {join, parse} from "path";
 
-import {buildNameObj} from "../util";
+import {buildNameObject} from "../util";
 import {blue, log} from "../log";
 
 const getDirName = require("path").dirname;
@@ -14,14 +14,14 @@ export const listAllSVG = (path: PathObject): SVGFile[] => {
             const {name, ext} = parse(file.name);
             if (ext === ".svg") {
                 return {
-                    name: buildNameObj(name),
+                    name: buildNameObject(name),
                     data: readFileSync(join(path.full, file.name)).toString()
                 };
             }
         }
     }).filter(file => !!file);
 
-    log.info(`Found ${files.length} SVGs in ${blue(path.short)}`);
+    log.info(`Found ${files.length} SVGs in ${blue(path.short)}.`);
     return files;
 };
 
@@ -40,7 +40,7 @@ export const saveFile = (path: PathObject, name: string, contents: string) => {
                 return;
             }
 
-            log.info(`Saved file ${blue(name)}`);
+            log.info(`Saved file ${blue(name)}.`);
         });
     });
 };

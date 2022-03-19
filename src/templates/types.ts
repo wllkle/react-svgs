@@ -1,4 +1,4 @@
-import {WARNING_COMMENT} from "../util";
+import {WARNING_COMMENT} from "../constants";
 
 export const typesTemplate = (content: SVGList, name: string, typescript: boolean) => {
     const list = clean(content);

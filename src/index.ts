@@ -1,14 +1,12 @@
-#!/usr/bin/env node
-
 import yargs from "yargs";
 
 import {opts} from "./io";
 import {validate} from "./validation";
 import {run} from "./app";
 import {log} from "./log";
-import {banner} from "./util/constants";
+import {BANNER} from "./constants";
 
-console.log(banner);
+console.log(BANNER);
 
 yargs(process.argv.slice(2))
     .pkgConf("svg")

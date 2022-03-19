@@ -2,15 +2,18 @@ import {buildPathObject} from "../util";
 import {validateInput, validateName, validateOutput} from "./helpers";
 
 export const validate = (argv: any) => new Promise<Args>((resolve, reject) => {
-    validateName(argv.name, reject);
-    validateInput(argv.input, reject);
-    validateOutput(argv.output, reject);
+    const name: string = parseStringArg(argv.name);
+    const inputStr: string = parseStringArg(argv.input);
+    const outputStr: string = parseStringArg(argv.output);
 
-    const input = buildPathObject(argv.input);
-    const output = buildPathObject(argv.output);
+    validateName(name, reject);
+    validateInput(inputStr, reject);
+    validateOutput(outputStr, reject);
+
+    const input = buildPathObject(inputStr);
+    const output = buildPathObject(outputStr);
 
     const {
-        name,
         typescript = false,
         nojsx,
         propTypes = false
@@ -25,3 +28,12 @@ export const validate = (argv: any) => new Promise<Args>((resolve, reject) => {
         propTypes
     });
 });
+
+const parseStringArg = (arg: any): string => {
+    let result = arg;
+    if (Array.isArray(arg)) {
+        result = arg[arg.length - 1];
+    }
+
+    return result.toString().trim();
+};

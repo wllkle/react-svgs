@@ -1,7 +1,7 @@
 import {INode, parse as svgson} from "svgson";
 
 import {optimizeSVG} from "./optimize";
-import {buildNameObj, getStyleObject, SVGDataList} from "../util";
+import {appendToListObject, buildNameObject, buildStyleObject} from "../util";
 import {blue, log} from "../log";
 
 export const parseList = (files: SVGFile[]): Promise<SVGList> => {
@@ -10,12 +10,12 @@ export const parseList = (files: SVGFile[]): Promise<SVGList> => {
         parseFile(file).then(resolve).catch(reject);
     }));
 
-    return new Promise<SVGList>(resolve => {
-        const svgDataList = new SVGDataList();
+    return new Promise<SVGList>((resolve, reject) => {
+        let svgList: SVGList = {};
         Promise.allSettled(queue)
-            .then((result) => {
+            .then(result => {
                 result.filter(res => res.status === "fulfilled").forEach(item => {
-                    if ("value" in item) svgDataList.append(item.value);
+                    if ("value" in item) svgList = appendToListObject(item.value, svgList);
                 });
 
                 result.filter(res => res.status === "rejected").forEach(item => {
@@ -24,8 +24,13 @@ export const parseList = (files: SVGFile[]): Promise<SVGList> => {
             })
             .catch(console.error)
             .finally(() => {
-                log.info(`Created list with ${blue(Object.keys(svgDataList.list).length)} SVGs`);
-                resolve(svgDataList.list);
+                const count = Object.keys(svgList).length;
+                if (count > 0) {
+                    log.info(`Created list with ${blue(count)} SVGs.`);
+                    resolve(svgList);
+                } else {
+                    reject("Failed to create list of SVGs.");
+                }
             });
     });
 };
@@ -76,14 +81,14 @@ const parseAttributes = (attributes: Record<string, string>): SVGAttributes => {
         // fixes hyphenated attributes such as "data-name"
         if (attr.includes("-")) {
             const val = attributes[attr];
-            const nameObj = buildNameObj(attr);
+            const nameObj = buildNameObject(attr);
             result[nameObj.camel] = val;
         } else if (attr === "class") {
             const val = attributes[attr];
             delete attributes[attr];
             attributes["className"] = val;
         } else if (attr === "style") {
-            result[attr] = getStyleObject(attributes[attr]);
+            result[attr] = buildStyleObject(attributes[attr]);
         } else {
             result[attr] = attributes[attr];
         }

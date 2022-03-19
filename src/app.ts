@@ -2,6 +2,7 @@ import {listAllSVG, saveFile} from "./io";
 import {parseList} from "./parser";
 import {getTemplatedFile} from "./templates";
 import {buildFileName} from "./util";
+import {log} from "./log";
 
 export const run = (args: Args): void => {
     const {input, output, name, typescript, jsx, propTypes} = args;
@@ -17,5 +18,5 @@ export const run = (args: Args): void => {
         const types = getTemplatedFile("types", options);
         const typesFile = buildFileName("types", typescript);
         saveFile(output, typesFile, types);
-    });
+    }).catch(log.error);
 };
