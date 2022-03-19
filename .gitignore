@@ -24,4 +24,5 @@ yarn-error.log
 
 tests/
 !tests/data
+!tests/coverage
 coverage/
