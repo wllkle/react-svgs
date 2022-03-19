@@ -21,7 +21,8 @@ export const listAllSVG = (path: PathObject): SVGFile[] => {
         }
     }).filter(file => !!file);
 
-    log.info(`Found ${files.length} SVGs in ${blue(path.short)}.`);
+    const count = files.length;
+    log.info(`Found ${count} SVG${count > 1 ? "s" : ""} in ${blue(path.short)}.`);
     return files;
 };
 

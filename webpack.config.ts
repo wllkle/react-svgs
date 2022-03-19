@@ -8,7 +8,6 @@ module.exports = {
     target: "node",
     entry: "./src/index.ts",
     externals: [nodeExternals()],
-    plugins: [new Shebang({banner: "#!/usr/bin/env node", raw: true})],
     optimization: {
         minimize: true
     },
@@ -25,6 +24,7 @@ module.exports = {
             }
         ]
     },
+    plugins: [new Shebang()],
     output: {
         path: path.join(__dirname, "dist"),
         filename: "svgs.js"

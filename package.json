@@ -1,6 +1,6 @@
 {
     "name": "react-svgs",
-    "version": "0.3.4",
+    "version": "0.3.8",
     "description": "Transform a directory of SVG files into an easily usable React component.",
     "scripts": {
         "build": "npm-run-all clean webpack",
@@ -9,11 +9,12 @@
         "prepublish": "run-s build",
         "clean": "rimraf dist",
         "webpack": "webpack",
+        "pretest": "rimraf coverage",
         "posttest": "coverage-badge-creator"
     },
-    "main": "dist/svgs.js",
+    "main": "./dist/svgs.js",
     "bin": {
-        "react-svgs": "dist/svgs.js"
+        "react-svgs": "./dist/svgs.js"
     },
     "author": {
         "name": "Rob Wilkie",
