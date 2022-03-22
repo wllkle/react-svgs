@@ -22,7 +22,7 @@ export const ${name} = (props${ts(`: ${name}Props`)}) => {
     const {attributes, children} = data[name] || {};
 
     const svgProps = {
-        ...(attributes) && {attributes},
+        ...(attributes) && {...attributes},
         ...(className) && {className},
         ...(style) && {style},
         ...(children) && {children: renderChildNodes(children)}
