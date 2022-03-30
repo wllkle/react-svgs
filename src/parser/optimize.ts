@@ -11,7 +11,7 @@ export const optimizeSVG = (value: SVGFile): void => {
         }
         return;
     } catch (e) {
-        log.error(`Failed while optimizing SVG ${value.name.camel}.`);
+        log.error(`Failed while optimizing SVG ${value.name.camel}`);
     }
 };
 

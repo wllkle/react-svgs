@@ -9,7 +9,8 @@ declare global {
         name: string,
         typescript: boolean,
         jsx: boolean,
-        propTypes: boolean
+        propTypes: boolean,
+        force: boolean
     }
 
     interface PathObject {

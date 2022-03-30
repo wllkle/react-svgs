@@ -22,7 +22,7 @@ export const listAllSVG = (path: PathObject): SVGFile[] => {
     }).filter(file => !!file);
 
     const count = files.length;
-    log.info(`Found ${count} SVG${count > 1 ? "s" : ""} in ${blue(path.short)}.`);
+    log.info(`Found ${count} SVG${count > 1 ? "s" : ""} in ${blue(path.short)}`);
     return files;
 };
 
@@ -41,7 +41,7 @@ export const saveFile = (path: PathObject, name: string, contents: string) => {
                 return;
             }
 
-            log.info(`Saved file ${blue(name)}.`);
+            log.info(`Saved file ${blue(name)}`);
         });
     });
 };

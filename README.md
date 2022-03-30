@@ -39,6 +39,7 @@ data. From the directory where the command is executed; the generated files will
 | `--out`, `-o`        | Output path (directory will be created)     | string  | ✔        |
 | `--name`, `-n`       | Generated React component name              | string  | ❌        |
 | `--typescript`, `-t` | Output TypeScript files                     | boolean | ❌        |
+| `--force`, `-f`      | Overwrite existing component file           | boolean | ❌        |
 | `--nojsx`            | Use `.js` / `.ts` file extensions           | boolean | ❌        |
 | `--proptypes`        | Generate PropTypes definition for component | boolean | ❌        |
 

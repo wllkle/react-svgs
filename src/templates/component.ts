@@ -14,18 +14,20 @@ import React${ts(", {ReactNode, CSSProperties}")} from "react";${propTypes ? `\n
 import {data${propTypes ? `, ${name}TypesArray` : ""}${ts(`, ${name}Types, INode`)}} from "./types";${ts(`\n\ninterface ${name}Props {
     name?: ${name}Types,
     className?: string,
-    style?: CSSProperties
+    style?: CSSProperties,
+    [key: string]: string
 }`)}
 
 export const ${name} = (props${ts(`: ${name}Props`)}) => {
-    const {name, className, style} = props;
+    const {name, className, style, ...rest} = props;
     const {attributes, children} = data[name] || {};
 
     const svgProps = {
         ...(attributes) && {...attributes},
         ...(className) && {className},
         ...(style) && {style},
-        ...(children) && {children: renderChildNodes(children)}
+        ...(children) && {children: renderChildNodes(children)},
+        ...rest
     };
 
     return (<svg {...svgProps}/>);

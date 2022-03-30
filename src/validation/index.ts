@@ -15,6 +15,7 @@ export const validate = (argv: any) => new Promise<Args>((resolve, reject) => {
 
     const {
         typescript = false,
+        force = false,
         nojsx,
         propTypes = false
     } = argv;
@@ -24,6 +25,7 @@ export const validate = (argv: any) => new Promise<Args>((resolve, reject) => {
         output,
         name,
         typescript,
+        force,
         jsx: nojsx !== true,
         propTypes
     });

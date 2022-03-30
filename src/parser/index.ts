@@ -26,10 +26,10 @@ export const parseList = (files: SVGFile[]): Promise<SVGList> => {
             .finally(() => {
                 const count = Object.keys(svgList).length;
                 if (count > 0) {
-                    log.info(`Created list with ${blue(count)} SVGs.`);
+                    log.info(`Created list with ${blue(count)} SVGs`);
                     resolve(svgList);
                 } else {
-                    reject("Failed to create list of SVGs.");
+                    reject("Failed to create list of SVGs");
                 }
             });
     });

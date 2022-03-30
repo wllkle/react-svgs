@@ -1,3 +1,4 @@
+import {existsSync} from "fs";
 import {join, normalize, sep} from "path";
 
 export const buildNameObject = (str: string): SVGName => {
@@ -49,4 +50,8 @@ export const appendToListObject = (data: SVGData, list: SVGList): SVGList => {
         ...list,
         [`${camel}`]: {name, attributes, children}
     };
+};
+
+export const fileExists = (path: PathObject, file: string): boolean => {
+    return existsSync(join(path.full, file));
 };

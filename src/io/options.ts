@@ -23,6 +23,12 @@ export const opts: { [key: string]: Options } = {
         description: "Output TypeScript files",
         default: false
     },
+    force: {
+        type: "boolean",
+        alias: ["f"],
+        description: "Overwrite existing component file",
+        default: false
+    },
     noJsx: {
         type: "boolean",
         alias: ["nojsx", "no-jsx"],
