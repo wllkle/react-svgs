@@ -9,12 +9,9 @@ export const componentTemplate = (
 
     return `${WARNING_COMMENT_FORCE}
 ${ts("\n// @ts-nocheck\n")}
-import React${ts(", {ReactNode, CSSProperties}")} from "react";${propTypes ? `\nimport PropTypes from "prop-types";` : ""}
-import {data${propTypes ? `, ${name}TypesArray` : ""}${ts(`, ${name}Types, INode`)}} from "./types";${ts(`\n\ninterface ${name}Props {
-    name?: ${name}Types,
-    className?: string,
-    style?: CSSProperties,
-    [key: string]: string
+import React${ts(", {ReactNode, DetailedHTMLProps, HTMLAttributes}")} from "react";${propTypes ? `\nimport PropTypes from "prop-types";` : ""}
+import {data${propTypes ? `, ${name}TypesArray` : ""}${ts(`, ${name}Types, INode`)}} from "./types";${ts(`\n\ninterface ${name}Props extends DetailedHTMLProps<HTMLAttributes<SVGElement>, any> {
+    name?: ${name}Types
 }`)}
 
 export const ${name} = (props${ts(`: ${name}Props`)}) => {
