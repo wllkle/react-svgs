@@ -39,9 +39,11 @@ data. From the directory where the command is executed; the generated files will
 | `--out`, `-o`        | Output path (directory will be created)     | string  | ✔        |
 | `--name`, `-n`       | Generated React component name              | string  | ❌        |
 | `--typescript`, `-t` | Output TypeScript files                     | boolean | ❌        |
-| `--force`, `-f`      | Overwrite existing component file           | boolean | ❌        |
+| `--force`, `-f` 🔸   | Overwrite existing component file           | boolean | ❌        |
 | `--nojsx`            | Use `.js` / `.ts` file extensions           | boolean | ❌        |
 | `--proptypes`        | Generate PropTypes definition for component | boolean | ❌        |
+
+🔸 _SVG data file is always overwritten to ensure it is up to date._
 
 ### Usage in package.json
 
@@ -79,11 +81,11 @@ The scripts below can be run using `npm run svg`, both examples achieve the same
 
 | Prop      | Type                                                              | Required |
 |-----------|-------------------------------------------------------------------|----------|
-| name*     | string                                                            | ✔        |
+| name 🔸   | string                                                            | ✔        |
 | className | string                                                            | ❌        |
 | style     | [CSSProperties](https://reactjs.org/docs/dom-elements.html#style) | ❌        |
 
-_* name prop must be one of the strings exported in `types.js` or `types.ts` - if using TypeScript this will be
+🔸 _name prop must be one of the strings exported in `types.js` or `types.ts` - if using TypeScript this will be
 enforced._
 
 #### Basic Example
