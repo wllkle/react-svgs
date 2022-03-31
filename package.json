@@ -1,6 +1,6 @@
 {
     "name": "react-svgs",
-    "version": "0.3.11",
+    "version": "0.3.12",
     "description": "Transform a directory of SVG files into an easily usable React component.",
     "scripts": {
         "build": "npm-run-all clean webpack",
@@ -24,7 +24,7 @@
     "homepage": "https://wilkie.io/projects/react-svgs",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/wllkle/react-svgs.git"
+        "url": "https://github.com/wllkle/react-svgs.git"
     },
     "bugs": {
         "url": "https://github.com/wllkle/react-svgs/issues"

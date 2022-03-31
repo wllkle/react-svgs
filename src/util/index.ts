@@ -1,4 +1,3 @@
-import {existsSync} from "fs";
 import {join, normalize, sep} from "path";
 
 export const buildNameObject = (str: string): SVGName => {
@@ -37,10 +36,21 @@ export const buildPathObject = (path: string): PathObject => {
     };
 };
 
-export const buildFileName = (name: string, typescript: boolean, jsx: boolean = false): string => {
+export const buildFileMeta = (type: TemplatedFileType, path: PathObject, typescript: boolean, jsx: boolean = false): TemplateMeta => {
+    const name = type === "component" ? "index" : "types";
+    const fileName = buildFileName(name, typescript, jsx);
+
+    return {
+        name: fileName,
+        path: join(path.full, fileName),
+        type
+    };
+};
+
+export const buildFileName = (name: string, typescript: boolean, jsx: boolean) => {
     const extension = `${typescript ? "t" : "j"}s${jsx ? "x" : ""}`;
     return `${name.trim()}.${extension}`;
-};
+}
 
 export const appendToListObject = (data: SVGData, list: SVGList): SVGList => {
     const {camel, hyphen: name} = data.name;
@@ -50,8 +60,4 @@ export const appendToListObject = (data: SVGData, list: SVGList): SVGList => {
         ...list,
         [`${camel}`]: {name, attributes, children}
     };
-};
-
-export const fileExists = (path: PathObject, file: string): boolean => {
-    return existsSync(join(path.full, file));
 };

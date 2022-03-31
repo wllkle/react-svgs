@@ -3,6 +3,19 @@ export {};
 declare global {
     type SVGAttributes = Record<string, string | object>;
 
+    type TemplatedFileType = "component" | "types";
+
+    interface TemplateMeta {
+        name: string,
+        path: string,
+        type: TemplatedFileType
+    }
+
+    interface TemplateFile {
+        meta: TemplateMeta,
+        data: string
+    }
+
     interface Args {
         input: PathObject,
         output: PathObject,

@@ -1,14 +1,13 @@
-import {WARNING_COMMENT} from "../constants";
+import {WARNING_COMMENT_FORCE} from "../constants";
 
 export const componentTemplate = (
-    content: SVGList,
     name: string,
     typescript: boolean,
     propTypes: boolean
 ): string => {
     const ts = (value: string) => typescript ? value : "";
 
-    return `${WARNING_COMMENT}
+    return `${WARNING_COMMENT_FORCE}
 ${ts("\n// @ts-nocheck\n")}
 import React${ts(", {ReactNode, CSSProperties}")} from "react";${propTypes ? `\nimport PropTypes from "prop-types";` : ""}
 import {data${propTypes ? `, ${name}TypesArray` : ""}${ts(`, ${name}Types, INode`)}} from "./types";${ts(`\n\ninterface ${name}Props {

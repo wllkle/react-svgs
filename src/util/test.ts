@@ -42,6 +42,7 @@ describe("util tests", () => {
         expect(pathObject).toEqual(pathObject);
     });
 
+    // TODO: FIX
     test("buildFileName", () => {
         const tests = [
             {name: "icon", ts: false, expect: "icon.js"},

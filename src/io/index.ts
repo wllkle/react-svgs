@@ -1,4 +1,4 @@
-import {Dirent, mkdir, readdirSync, readFileSync, writeFile} from "fs";
+import {Dirent, existsSync, mkdir, readdirSync, readFileSync, writeFile} from "fs";
 import {join, parse} from "path";
 
 import {buildNameObject} from "../util";
@@ -26,24 +26,26 @@ export const listAllSVG = (path: PathObject): SVGFile[] => {
     return files;
 };
 
-export const saveFile = (path: PathObject, name: string, contents: string) => {
-    const fullPath = join(path.full, name);
-
-    mkdir(getDirName(fullPath), {recursive: true}, (err) => {
+export const saveFile = (file: TemplateFile) => {
+    mkdir(getDirName(file.meta.path), {recursive: true}, (err) => {
         if (err) {
             log.error(err.message);
             return;
         }
 
-        writeFile(fullPath, contents, err => {
+        writeFile(file.meta.path, file.data, err => {
             if (err) {
                 log.error(err.message);
                 return;
             }
 
-            log.info(`Saved file ${blue(name)}`);
+            log.info(`Saved file ${blue(file.meta.name)}`);
         });
     });
+};
+
+export const fileExists = (file: TemplateMeta): boolean => {
+    return existsSync(file.path);
 };
 
 export {opts} from "./options";
